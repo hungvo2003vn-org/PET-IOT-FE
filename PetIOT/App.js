@@ -2,13 +2,27 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
 import DrawerNavigationRoutes from './Screen/DrawerNavigationRoutes';
+import AuthNavigationRoutes from './Screen/AuthNavigationRoutes';
 
 export default function App() {
-  return (
-    <PaperProvider>
-      <DrawerNavigationRoutes/>
-    </PaperProvider>
-  );
+  
+  const isLoggedIn = true;
+
+  if(!isLoggedIn){
+    return (
+      <PaperProvider>
+        <AuthNavigationRoutes/>
+      </PaperProvider>
+    );
+  } else{
+    return (
+      <PaperProvider>
+        <DrawerNavigationRoutes/>
+      </PaperProvider>
+    )
+  }
+
+
 }
 
 const styles = StyleSheet.create({
