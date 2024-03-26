@@ -6,7 +6,7 @@ import AuthNavigationRoutes from './Screen/AuthNavigationRoutes';
 
 export default function App() {
   
-  const isLoggedIn = true;
+  const isLoggedIn = false;
 
   if(!isLoggedIn){
     return (
