@@ -1,6 +1,6 @@
 import React from 'react';
-import {View,Text,Image,StyleSheet, Alert, ScrollView} from 'react-native';
-import {Button, TextInput } from 'react-native-paper';
+import {View,Text,Image,StyleSheet, Alert, ScrollView, TextInput} from 'react-native';
+import {Button } from 'react-native-paper';
 import Logo from "../assets/common/logo.svg";
 import UserIcon from "../assets/LoginScreen/account-svgrepo-com 2.svg";
 import PasswordIcon from "../assets/LoginScreen/password-svgrepo-com 2.svg";
@@ -12,7 +12,7 @@ export default function LoginScreen(){
         // OUTER LAYER
         <ScrollView style = {styles.container}>
             {/* APP LOGO STACK */}
-            <View style={styles.logo}>
+            <View style={styles.logo} >
                 <Logo />
             </View>
 
@@ -25,21 +25,36 @@ export default function LoginScreen(){
             <View style = {styles.inputBoxes}>
                 {/* USERNAME INPUT BOX */}
                 <View style = {styles.inputArea}>
-                    <UserIcon/>
+                    {/* Icon container */}
+                    <View style = {styles.inputAreaIcon}>
+                        <UserIcon  width={23} height = {23}/>
+                    </View>
+
                     <TextInput 
-                    label ="Username"
+                    // label ="Username"
+                    placeholder='Username'
                     backgroundColor='#EFE0D6'
-                    height = '48'
+                    underlineColor='#EFE0D6'
+                    activeUnderlineColor='#EFE0D6'
+                    selectionColor='#EFE0D6'
+                    cursorColor='black'
+                    style={styles.inputAreaText}
                     />
                 </View>
 
                 {/* PASSWORD INPUT BOX */}
                 <View style = {styles.inputArea}>
-                    <PasswordIcon/>
+                    {/* Icon container */}
+                    <View style={styles.inputAreaIcon}>
+                        <PasswordIcon  width={23} height = {23}/>
+                    </View>
                     <TextInput 
-                    label ="Password"
+                    placeholder ="Password"
                     backgroundColor='#EFE0D6'
-                    height='48'
+                    underlineColor='#EFE0D6'
+                    cursorColor='black'
+                    activeUnderlineColor='#EFE0D6'
+                    style={styles.inputAreaText}
                     />
                 </View>
 
@@ -57,9 +72,9 @@ export default function LoginScreen(){
                 Login</Button>
 
                 {/* Forgot Password */}
-                <Text style={styles.bottomText}>Forgot password?</Text>
+                <Text style={styles.bottomTextForgotPassword}>Forgot password?</Text>
 
-                <Text style={styles.bottomText}>Sign up now</Text>
+                <Text style={styles.bottomTextSignUpNow}>Sign up now</Text>
 
             </View>
         </ScrollView>
@@ -68,7 +83,7 @@ export default function LoginScreen(){
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: '#FFDCC2',
     },
 
     logo:{
@@ -80,7 +95,8 @@ const styles = StyleSheet.create({
 
     appName:{
         flex:3,
-        marginTop: '20%',
+        marginTop: '5%',
+        marginBottom: '20%',
         alignItems: 'center',
         justifyContent: 'flex-start',
     },
@@ -99,30 +115,57 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         backgroundColor:'#EFE0D6',
         margin:'2%',
-        width:275,
+        width:'70%',
         height:48,
         alignSelf:'center',
         borderRadius:20,
-
     },
+    inputAreaText:{
+        height: 48,
+        alignSelf: 'center',
+        justifyContent: 'center',
+        marginLeft:5,
+    },
+    inputAreaIcon:{
+        alignSelf:'center',
+        backgroundColor:'white',
+        height:40,
+        width: 40,
+        borderRadius: 100,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginLeft: 13,
+        padding:0,
+    },  
 
     bottom:{
         flex:3,
-        width:'100%'
+        width:'100%',
+        paddingTop:100,
     },
     loginButton:{
         height:40,
         width:210,
         alignSelf: 'center',
     },
-    bottomText:{
+    bottomTextForgotPassword:{
         alignSelf:'center',
         color: 'black',
         fontSize: 14,
         fontFamily:'Roboto',
         fontWeight: '400',
         letterSpacing: 0.10,
-
+        margin:10,
+        paddingTop:30,
+    },
+    bottomTextSignUpNow:{
+        alignSelf:'center',
+        color: 'black',
+        fontSize: 14,
+        fontFamily:'Roboto',
+        fontWeight: '400',
+        letterSpacing: 0.10,
+        margin:20,
     }
 
 
