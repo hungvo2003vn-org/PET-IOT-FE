@@ -4,6 +4,7 @@ import { PaperProvider } from 'react-native-paper';
 import DrawerNavigationRoutes from './Screen/DrawerNavigationRoutes';
 import AuthNavigationRoutes from './Screen/AuthNavigationRoutes';
 
+
 export default function App() {
   
   const isLoggedIn = false;
@@ -11,6 +12,7 @@ export default function App() {
   if(!isLoggedIn){
     return (
       <PaperProvider>
+        <StatusBar style='dark'/>
         <AuthNavigationRoutes/>
       </PaperProvider>
     );
