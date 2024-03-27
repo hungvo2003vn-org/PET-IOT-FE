@@ -5,9 +5,9 @@ import DrawerNavigationRoutes from './Screen/DrawerNavigationRoutes';
 import AuthNavigationRoutes from './Screen/AuthNavigationRoutes';
 
 export default function App() {
-  
-  const isLoggedIn = false;
 
+  // Mockup logic mechanism
+  const isLoggedIn = false;
   if(!isLoggedIn){
     return (
       <PaperProvider>
