@@ -10,17 +10,25 @@ export default function FeedingStationScreen(){
         <ScrollView style={styles.container}>
 
             {/* APP BAR */}
-            <Appbar 
-                style={styles.appBar}
-                mode = 'large'
-            >
-                <Appbar.Header>
-                    <Appbar.Content 
-                        title='Feeding Stations'
-                        style={styles.appBarContent}
-                    />
-                </Appbar.Header>
-            </Appbar>
+            <Appbar.Header mode='large' style={styles.appBar}>
+                <Appbar.Content 
+                    title='Feeding Stations'
+                    titleStyle={styles.appBarContentTitle}
+                    style={styles.appBarContent}
+                />
+            </Appbar.Header>
+
+            {/* STATIONS DISPLAY */}
+            <View>
+                <FeedingStationCard
+                    stationName='Station A'
+                    stationStatus='online'
+                    stationFoodRemain='100%'
+                    stationChamberRemain='100%'
+                    stationMode='Manual'
+                    stationSound='None'
+                />
+            </View>
 
 
         </ScrollView>
@@ -37,7 +45,20 @@ const styles = StyleSheet.create({
         backgroundColor: '#88511D',
     },
     appBarContent:{
-        color:'white',
+        width:'100%',
+        height:44,
+        marginLeft:0,
+        marginBottom:31,
+    },
+    appBarContentTitle:{
+        backgroundColor: '#88511D',
+        color: 'white',
+        fontSize: 36,
+        fontFamily: 'Roboto',
+        fontWeight: '400',
+        lineHeight: 44,
+        alignSelf:'center',
+        height:44,
     }
 
 
