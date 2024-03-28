@@ -22,13 +22,35 @@ export default function FeedingStationScreen(){
             <View>
                 <FeedingStationCard
                     stationName='Station A'
-                    stationStatus='online'
+                    stationStatus='Online'
                     stationFoodRemain='100%'
-                    stationChamberRemain='100%'
+                    stationChamberRemain='70%'
                     stationMode='Manual'
                     stationSound='None'
                 />
+                <FeedingStationCard
+                    stationName='Station B'
+                    stationStatus='Online'
+                    stationFoodRemain='0%'
+                    stationChamberRemain='70%'
+                    stationMode='Auto: 9:00am, 2:00pm'
+                    stationSound="'Woof woof'"
+                />
+                <FeedingStationCard
+                    stationName='Station C'
+                    stationStatus='Offline'
+                    stationFoodRemain='0%'
+                    stationChamberRemain='0%'
+                    stationMode='Auto: 9:00pm'
+                    stationSound="'Meow'"
+                />
             </View>
+
+            <Button 
+                style={styles.addButton}
+                buttonColor='#88511D'
+                textColor='white'
+            >Add</Button>
 
 
         </ScrollView>
@@ -38,7 +60,7 @@ export default function FeedingStationScreen(){
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFDCC2',
+        backgroundColor: 'white',
     },
 
     appBar:{
@@ -59,7 +81,13 @@ const styles = StyleSheet.create({
         lineHeight: 44,
         alignSelf:'center',
         height:44,
-    }
+    },
+
+    addButton:{
+        width:210,
+        alignSelf:'center',
+        marginTop: 30,
+    },
 
 
 })
