@@ -31,13 +31,13 @@ export default function DrawerNavigationRoutes(){
                 <Stack.Screen name = "SettingsScreen" component={SettingsScreen}/>
             </Stack.Navigator> */}
 
-            <Tab.Navigator initialRouteName='HomeScreen'>
+            <Tab.Navigator initialRouteName='HomeScreen' screenOptions={{headerShown: false}}>
                 <Tab.Screen name ="HomeScreen" component={HomeScreen}></Tab.Screen>
 
                 <Tab.Screen name ="PetScreenStack">
                     {
                         ()=>(
-                            <PetScreenStack.Navigator initialRouteName='PetScreen'>
+                            <PetScreenStack.Navigator initialRouteName='PetScreen' screenOptions={{headerShown: false}}>
                                 <PetScreenStack.Screen name="PetScreen" component={PetScreen}/>
                                 <PetScreenStack.Screen name="PetDetailScreen" component={PetDetailScreen}/>
                             </PetScreenStack.Navigator>
@@ -48,7 +48,7 @@ export default function DrawerNavigationRoutes(){
                 <Tab.Screen name ="FeedingStationScreenStack">
                     {
                         ()=>(
-                            <PetScreenStack.Navigator initialRouteName='FeedingStationScreen'>
+                            <PetScreenStack.Navigator initialRouteName='FeedingStationScreen' screenOptions={{headerShown: false}}>
                                 <PetScreenStack.Screen name="FeedingStationScreen" component={FeedingStationScreen}/>
                                 <PetScreenStack.Screen name="FeedingStationDetailScreen" component={FeedingStationDetailScreen}/>
                             </PetScreenStack.Navigator>
