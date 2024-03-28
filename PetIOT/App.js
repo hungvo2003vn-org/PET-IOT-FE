@@ -8,7 +8,7 @@ import AuthNavigationRoutes from './Screen/AuthNavigationRoutes';
 export default function App() {
 
   // Mockup logic mechanism
-  const isLoggedIn = false;
+  const isLoggedIn = true;
   if(!isLoggedIn){
     return (
       <PaperProvider>
