@@ -4,7 +4,7 @@ import {Button, Appbar} from 'react-native-paper';
 import FeedingStationCard from '../Components/FeedingStationCard';
 
 
-export default function FeedingStationScreen(){
+export default function FeedingStationScreen({navigation}){
     return (
         //OUTER LAYER
         <ScrollView style={styles.container}>
@@ -27,6 +27,7 @@ export default function FeedingStationScreen(){
                     stationChamberRemain='70%'
                     stationMode='Manual'
                     stationSound='None'
+                    navigation={navigation}
                 />
                 <FeedingStationCard
                     stationName='Station B'
@@ -35,6 +36,7 @@ export default function FeedingStationScreen(){
                     stationChamberRemain='70%'
                     stationMode='Auto: 9:00am, 2:00pm'
                     stationSound="'Woof woof'"
+                    navigation={navigation}
                 />
                 <FeedingStationCard
                     stationName='Station C'
@@ -43,6 +45,7 @@ export default function FeedingStationScreen(){
                     stationChamberRemain='0%'
                     stationMode='Auto: 9:00pm'
                     stationSound="'Meow'"
+                    navigation={navigation}
                 />
             </View>
 
@@ -50,6 +53,7 @@ export default function FeedingStationScreen(){
                 style={styles.addButton}
                 buttonColor='#88511D'
                 textColor='white'
+
             >Add</Button>
 
 
@@ -87,6 +91,7 @@ const styles = StyleSheet.create({
         width:210,
         alignSelf:'center',
         marginTop: 30,
+        marginBottom: 30,
     },
 
 

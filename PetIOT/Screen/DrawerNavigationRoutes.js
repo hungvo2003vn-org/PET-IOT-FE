@@ -32,14 +32,14 @@ export default function DrawerNavigationRoutes(){
             </Stack.Navigator> */}
 
             <Tab.Navigator initialRouteName='HomeScreen' screenOptions={{headerShown: false}}>
-                <Tab.Screen name ="HomeScreen" component={HomeScreen}></Tab.Screen>
+                <Tab.Screen name ="Home" component={HomeScreen}></Tab.Screen>
 
                 <Tab.Screen name ="PetScreenStack">
                     {
                         ()=>(
                             <PetScreenStack.Navigator initialRouteName='PetScreen' screenOptions={{headerShown: false}}>
-                                <PetScreenStack.Screen name="PetScreen" component={PetScreen}/>
-                                <PetScreenStack.Screen name="PetDetailScreen" component={PetDetailScreen}/>
+                                <PetScreenStack.Screen name="Pet" component={PetScreen}/>
+                                <PetScreenStack.Screen name="PetDetail" component={PetDetailScreen}/>
                             </PetScreenStack.Navigator>
                         )
                     }
@@ -48,15 +48,15 @@ export default function DrawerNavigationRoutes(){
                 <Tab.Screen name ="FeedingStationScreenStack">
                     {
                         ()=>(
-                            <PetScreenStack.Navigator initialRouteName='FeedingStationScreen' screenOptions={{headerShown: false}}>
-                                <PetScreenStack.Screen name="FeedingStationScreen" component={FeedingStationScreen}/>
-                                <PetScreenStack.Screen name="FeedingStationDetailScreen" component={FeedingStationDetailScreen}/>
-                            </PetScreenStack.Navigator>
+                            <FeedingStationScreenStack.Navigator initialRouteName='FeedingStationScreen' screenOptions={{headerShown: false}}>
+                                <FeedingStationScreenStack.Screen name="FeedingStation" component={FeedingStationScreen}/>
+                                <FeedingStationScreenStack.Screen name="FeedingStationDetail" component={FeedingStationDetailScreen}/>
+                            </FeedingStationScreenStack.Navigator>
                         )
                     }
                 </Tab.Screen>
 
-                <Tab.Screen name ="SettingsScreen" component={SettingsScreen}></Tab.Screen>
+                <Tab.Screen name ="Settings" component={SettingsScreen}></Tab.Screen>
                     
             </Tab.Navigator>
 

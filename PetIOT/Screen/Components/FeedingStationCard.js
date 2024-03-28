@@ -1,44 +1,46 @@
 import React from 'react';
-import {View,StyleSheet,Alert,ScrollView} from 'react-native';
+import {View,StyleSheet,Alert,ScrollView, Pressable} from 'react-native';
 import {Button,Card,Text} from 'react-native-paper';
 
-export default function FeedingStationCard({stationName,stationStatus,stationFoodRemain,stationChamberRemain, stationMode, stationSound}){
+export default function FeedingStationCard({stationName,stationStatus,stationFoodRemain,stationChamberRemain, stationMode, stationSound,navigation}){
     return (
         <Card style={styles.card}>
-            <Card.Title 
-                title={stationName}
-                subtitle={stationStatus}
-                subtitleStyle = {{color: stationStatus == 'Online' ? 'green' : 'red'}}
-            />
-            <Card.Content style={styles.cardContent}>
-                {/* Horizontal line */}
-                <View style={{borderBottomColor:'black', borderBottomWidth: 1}}/>
+            <Pressable onPress={()=>navigation.navigate('FeedingStationDetail',{stationName:stationName})}>
+                <Card.Title 
+                    title={stationName}
+                    subtitle={stationStatus}
+                    subtitleStyle = {{color: stationStatus == 'Online' ? 'green' : 'red'}}
+                />
+                <Card.Content style={styles.cardContent}>
+                    {/* Horizontal line */}
+                    <View style={{borderBottomColor:'black', borderBottomWidth: 1}}/>
 
-                {/* Food on dish display */}
-                <View style={styles.informationDisplayer}>
-                    <Text style={styles.informationType}>Food on dish</Text>
-                    <Text style={styles.informationValue}>{stationFoodRemain}</Text>
-                </View>
+                    {/* Food on dish display */}
+                    <View style={styles.informationDisplayer}>
+                        <Text style={styles.informationType}>Food on dish</Text>
+                        <Text style={styles.informationValue}>{stationFoodRemain}</Text>
+                    </View>
 
-                {/* Food in chamber display */}
-                <View style={styles.informationDisplayer}>
-                    <Text style={styles.informationType}>Food in chamber</Text>
-                    <Text style={styles.informationValue}>{stationChamberRemain}</Text>
-                </View>
+                    {/* Food in chamber display */}
+                    <View style={styles.informationDisplayer}>
+                        <Text style={styles.informationType}>Food in chamber</Text>
+                        <Text style={styles.informationValue}>{stationChamberRemain}</Text>
+                    </View>
 
-                {/* Mode display */}
-                <View style={styles.informationDisplayer}>
-                    <Text style={styles.informationType}>Mode</Text>
-                    <Text style={styles.informationValue}>{stationMode}</Text>
-                </View>
+                    {/* Mode display */}
+                    <View style={styles.informationDisplayer}>
+                        <Text style={styles.informationType}>Mode</Text>
+                        <Text style={styles.informationValue}>{stationMode}</Text>
+                    </View>
 
-                {/* Sound display */}
-                <View style={styles.informationDisplayer}>
-                    <Text style={styles.informationType}>Sound</Text>
-                    <Text style={styles.informationValue}>{stationSound}</Text>
-                </View>
+                    {/* Sound display */}
+                    <View style={styles.informationDisplayer}>
+                        <Text style={styles.informationType}>Sound</Text>
+                        <Text style={styles.informationValue}>{stationSound}</Text>
+                    </View>
 
-            </Card.Content>
+                </Card.Content>
+            </Pressable>
             <Card.Actions style={styles.cardAction}>
                 <Button 
                     style={styles.cardFeedNowButton}
