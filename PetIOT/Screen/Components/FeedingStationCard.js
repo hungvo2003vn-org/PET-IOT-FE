@@ -1,11 +1,11 @@
 import React from 'react';
-import {View,StyleSheet,Alert,ScrollView, Pressable} from 'react-native';
+import {View,StyleSheet,Alert,ScrollView, Pressable,TouchableHighlight} from 'react-native';
 import {Button,Card,Text} from 'react-native-paper';
 
 export default function FeedingStationCard({stationName,stationStatus,stationFoodRemain,stationChamberRemain, stationMode, stationSound,navigation}){
     return (
         <Card style={styles.card}>
-            <Pressable onPress={()=>navigation.navigate('FeedingStationDetail',{stationName:stationName})}>
+            <Pressable onPress={()=>navigation.navigate('FeedingStationDetail',{stationName:stationName,stationStatus:stationStatus})}>
                 <Card.Title 
                     title={stationName}
                     subtitle={stationStatus}
