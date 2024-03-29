@@ -1,7 +1,7 @@
 import React from 'react';
 import {View,Text,StyleSheet,Alert,ScrollView} from 'react-native';
 import {Button, Appbar} from 'react-native-paper';
-import FeedingStationCard from '../Components/FeedingStationCard';
+import FeedingStationCard from '../Components/FeedingStation/FeedingStationCard';
 
 
 export default function FeedingStationScreen({navigation}){

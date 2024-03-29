@@ -8,6 +8,7 @@ export default function FeedingStationCard({stationName,stationStatus,stationFoo
             <Pressable onPress={()=>navigation.navigate('FeedingStationDetail',{stationName:stationName,stationStatus:stationStatus})}>
                 <Card.Title 
                     title={stationName}
+                    titleStyle={styles.cardTitleStyle}
                     subtitle={stationStatus}
                     subtitleStyle = {{color: stationStatus == 'Online' ? 'green' : 'red'}}
                 />
@@ -62,6 +63,14 @@ const styles = StyleSheet.create({
         backgroundColor:'#FFF1E8',
         margin:6,
         marginTop: 20
+    },
+    cardTitleStyle:{
+        color:'#221A14',
+        fontSize: 16,
+        fontFamily:'Roboto',
+        fontWeight:'600',
+        lineHeight:24,
+        letterSpacing:0.15
     },
     informationDisplayer:{
         flexDirection:'row',

@@ -3,6 +3,11 @@ import {View,Text,StyleSheet,Alert,ScrollView, Pressable,TouchableHighlight} fro
 import {Button, Appbar} from 'react-native-paper';
 import PowerIcon from '../../../assets/FeedingStationDetailScreen/power-button-svgrepo-com 2.svg' 
 
+import BasicInformationCard from '../../Components/FeedingStationDetail/BasicInformationCard';
+import PetAssignCard from '../../Components/FeedingStationDetail/PetAssignCard';
+import SettingsCard from '../../Components/FeedingStationDetail/SettingsCard';
+import StatisticsAndSuggestionsCard from '../../Components/FeedingStationDetail/StatisticsAndSuggestionsCard';
+
 export default function FeedingStationDetailScreen({navigation,route}){
     return (
         //OUTER LAYER
@@ -39,6 +44,16 @@ export default function FeedingStationDetailScreen({navigation,route}){
                     </TouchableHighlight>
                 </View>
 
+            </View>
+
+
+
+            {/* SETTING CATEGORY DISPLAY */}
+            <View>
+                <SettingsCard/>
+                <PetAssignCard/>
+                <BasicInformationCard/>
+                <StatisticsAndSuggestionsCard/>
             </View>
 
         </ScrollView>
