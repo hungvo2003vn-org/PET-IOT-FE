@@ -8,7 +8,7 @@ import SoundIcon from '../../../assets/FeedingStationDetailScreen/sound.svg';
 import FoodAmountIcon from '../../../assets/FeedingStationDetailScreen/food-amount.svg';
 
 import ScheduleModal from './ScheduleModal';
-import DropdownComponent from './SoundDropdown';
+import SoundDropdown from './SoundDropdown';
 
 export default function SettingsCard(){
     // Auto mode states
@@ -26,18 +26,19 @@ export default function SettingsCard(){
 
 
     return (
-        <View>
-            <Text>Settings</Text>
+        <View style={styles.cardContainer}>
+            <Text style = {styles.settingText}>Settings</Text>
             <Card style={styles.card}>
                 <Card.Content style={styles.cardContent}>
                     {/* Auto mode */}
                     <View style={styles.cardList}>
-                        <AutoModeIcon/>
-                        <Text>Auto mode</Text>
+                        <AutoModeIcon style={styles.cardIcon}/>
+                        <Text style={styles.cardSetting}>Auto mode</Text>
                         <Switch 
                             value = {isAutoModeOn}
                             onValueChange ={onToggleAutoMode}
                             color = 'black'
+                            style={styles.cardControl}
                         />
                     </View>           
 
@@ -46,8 +47,8 @@ export default function SettingsCard(){
 
                     {/* Schedule */}
                     <View style={styles.cardList}>
-                        <ScheduleIcon/>
-                        <Text>Schedule</Text>
+                        <ScheduleIcon style={styles.cardIcon}/>
+                        <Text style={styles.cardSetting}>Schedule</Text>
 
                         <Portal>
                             <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
@@ -55,9 +56,12 @@ export default function SettingsCard(){
                             </Modal>
                         </Portal>
 
-                        <View style={styles.buttonCover}>
-                            <Chip onPress={showModal}>Manage Schedule</Chip>
-                        </View>
+                        <Chip 
+                            mode='outlined'
+                            onPress={showModal}
+                            textStyle={styles.chipText}
+                            style={styles.chipStyle}
+                        >edit</Chip>
                     </View>          
 
                     {/* Horizontal line */}
@@ -65,11 +69,13 @@ export default function SettingsCard(){
 
                     {/* Sound */}
                     <View style={styles.cardList}>
-                        <SoundIcon/>
-                        <Text>Sound</Text>
+                        <SoundIcon style={styles.cardIcon}/>
+                        <Text style={styles.cardSetting}>Sound</Text>
 
                         {/* Sound options */}
-                        <DropdownComponent/>
+                        <View style={styles.cardControl}>
+                            <SoundDropdown />
+                        </View>
                     </View>           
 
                     {/* Horizontal line */}
@@ -77,12 +83,15 @@ export default function SettingsCard(){
 
                     {/* Food amount */}
                     <View style={styles.cardList}>
-                        <FoodAmountIcon/>
-                        <Text>Food amount (grams)</Text>
+                        <FoodAmountIcon style={styles.cardIcon}/>
+                        <Text style={styles.cardSetting}>Food amount (grams)</Text>
                         <TextInput
                             value={text}
+                            mode='outlined'
                             onChangeText={text=> setText(text)}
                             inputMode = 'numeric'
+                            dense='true'
+                            style={styles.textInputControl}
                         />
                     </View>            
                     
@@ -93,34 +102,61 @@ export default function SettingsCard(){
 }
 
 const styles = StyleSheet.create({
+    cardContainer:{
+        marginTop:20,
+    },
     card:{
         backgroundColor:'#FFF1E8',
         margin:6,
-        marginTop: 20
+    },
+    cardIcon:{
+        flex:1,
+        alignSelf:'center',
+    },
+    cardSetting:{
+        flex:1,
+        alignSelf:'center',
+        marginLeft:15,
+        color:'#51443B',
+        fontSize:14,
+        fontFamily: 'Roboto',
+        fontWeight:'500',
+        lineHeight:20,
+        letterSpacing: 0.10,
+    },
+    cardControl:{
+        flex:1,
+        alignSelf:'center',
+    },
+    textInputControl:{
+        alignSelf:'center',
+        height:30,
+        textAlign:'center',
+        textAlignVertical:'center'
+    },
+    chipText:{
+        color:'black',
+    },
+    chipStyle:{
+        height:35,
+        alignSelf:'center',
+        textAlignVertical:'center'
+    },
+
+    settingText:{
+        color:'black',
+        fontSize:14,
+        fontFamily: 'Roboto',
+        fontWeight: 700,
+        lineHeight:20,
+        letterSpacing: 0.10,
+        marginLeft: 10,
     },
 
     cardList:{
-        flexDirection:'row'
+        flexDirection:'row',
+        height:50,
     },
 
-    dropdown: {
-        margin: 16,
-        height: 50,
-        borderBottomColor: 'gray',
-        borderBottomWidth: 0.5,
-      },
-      placeholderStyle: {
-        fontSize: 16,
-      },
-      selectedTextStyle: {
-        fontSize: 16,
-      },
-      iconStyle: {
-        width: 20,
-        height: 20,
-      },
-      inputSearchStyle: {
-        height: 40,
-        fontSize: 16,
-      },
+
 })

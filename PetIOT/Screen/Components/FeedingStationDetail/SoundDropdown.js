@@ -4,14 +4,14 @@
 
   const data = [
     { label: 'None', value: '0'},
-    { label: 'Item 1', value: '1' },
-    { label: 'Item 2', value: '2' },
-    { label: 'Item 3', value: '3' },
-    { label: 'Item 4', value: '4' },
-    { label: 'Item 5', value: '5' },
-    { label: 'Item 6', value: '6' },
-    { label: 'Item 7', value: '7' },
-    { label: 'Item 8', value: '8' },
+    { label: 'Sound 1', value: '1' },
+    { label: 'Sound 2', value: '2' },
+    { label: 'Sound 3', value: '3' },
+    { label: 'Sound 4', value: '4' },
+    { label: 'Sound 5', value: '5' },
+    { label: 'Sound 6', value: '6' },
+    { label: 'Sound 7', value: '7' },
+    { label: 'Sound 8', value: '8' },
   ];
 
   const SoundDropdown = () => {
@@ -20,18 +20,17 @@
     return (
       <Dropdown
         style={styles.dropdown}
+        containerStyle={styles.container}
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
         inputSearchStyle={styles.inputSearchStyle}
         iconStyle={styles.iconStyle}
         data={data}
-        search
+        value={value}
         maxHeight={300}
         labelField="label"
         valueField="value"
         placeholder="Select item"
-        searchPlaceholder="Search..."
-        value={value}
         onChange={item => {
           setValue(item.value);
         }}
@@ -42,28 +41,37 @@
   export default SoundDropdown;
 
   const styles = StyleSheet.create({
+    container:{
+
+    },
     dropdown: {
-      margin: 16,
       height: 50,
-      width: 90,
-      borderBottomColor: 'gray',
-      borderBottomWidth: 0.5,
+      width: 100,
+      alignSelf:'flex-end',
+      justifyContent:'center'
     },
     icon: {
-      marginRight: 5,
     },
     placeholderStyle: {
-      fontSize: 16,
+      fontSize: 14,
+      color:'#51443B',
+      fontFamily:'Roboto',
+      fontWeight:'400',
+      lineHeight:16,
+      letterSpacing:0.40,
+      alignSelf:'center'
     },
     selectedTextStyle: {
-      fontSize: 16,
+      fontSize: 14,
+      color:'#51443B',
+      fontFamily:'Roboto',
+      fontWeight:'400',
+      lineHeight:16,
+      letterSpacing:0.40,
+      alignSelf:'center'
     },
     iconStyle: {
-      width: 20,
-      height: 20,
+
     },
-    inputSearchStyle: {
-      height: 40,
-      fontSize: 16,
-    },
+
   });

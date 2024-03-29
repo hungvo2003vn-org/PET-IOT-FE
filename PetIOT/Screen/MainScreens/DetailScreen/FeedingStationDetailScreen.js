@@ -55,6 +55,12 @@ export default function FeedingStationDetailScreen({navigation,route}){
                 <BasicInformationCard/>
                 <StatisticsAndSuggestionsCard/>
             </View>
+            <Button 
+                style={styles.deleteButton}
+                buttonColor='#BA1A1A'
+                textColor='white'
+                onPress={()=> Alert.alert('You sure bout this?')}
+            >Delete</Button>
 
         </ScrollView>
     )
@@ -114,4 +120,11 @@ const styles = StyleSheet.create({
         alignSelf:'center',
         margin:25,
     },
+
+    deleteButton:{
+        width:210,
+        alignSelf:'center',
+        marginTop: 30,
+        marginBottom: 30,
+    }
 })
