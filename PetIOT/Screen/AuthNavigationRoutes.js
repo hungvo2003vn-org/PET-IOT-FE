@@ -13,8 +13,6 @@ const Stack = createNativeStackNavigator();
 
 
 export default function AuthNavigationRoutes(){
-
-
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName='LoginScreen' screenOptions={{headerShown:false}}>

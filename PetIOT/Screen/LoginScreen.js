@@ -1,12 +1,48 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import {View,Text,Image,StyleSheet, Alert, ScrollView, TextInput} from 'react-native';
 import {Button } from 'react-native-paper';
+import axios from 'axios';
+import * as SecureStore from 'expo-secure-store';
+import * as Updates from 'expo-updates';
+
+
 import Logo from "../assets/common/logo.svg";
 import UserIcon from "../assets/LoginScreen/account-svgrepo-com 2.svg";
 import PasswordIcon from "../assets/LoginScreen/password-svgrepo-com 2.svg";
 
+const EXPO_PUBLIC_API_URL="https://pet-iot-be.onrender.com"
 
-export default function LoginScreen({navigation}){
+async function handleLogin({username,password}){
+
+    axios.post(`${EXPO_PUBLIC_API_URL}/v1/user/login`,{
+        email:`${username}`,
+        password:`${password}`
+    })
+    .then(function(response){
+        const data = (response.data)
+
+        if (data){
+            SecureStore.setItem('accessToken',data.data.accessToken);
+            SecureStore.setItem('refreshToken',data.data.refreshToken);
+            Updates.reloadAsync();
+        }   else{
+            Alert.alert('Error happens');
+        } 
+        
+
+    })
+    .catch(function(error){
+        console.log(error)
+        Alert.alert('Error happens')
+    })
+
+}
+
+export default function LoginScreen({navigation,route}){
+    const [username,setUsername] = useState('');
+    const [password,setPassword] = useState('');
+    const [error,setError] = useState(null);
+
 
     return (
         // OUTER LAYER
@@ -39,7 +75,7 @@ export default function LoginScreen({navigation}){
                     selectionColor='#EFE0D6'
                     cursorColor='black'
                     style={styles.inputAreaText}
-                    secureTextEntry={true}
+                    onChangeText={(text)=> setUsername(text)}
                     />
                 </View>
 
@@ -56,6 +92,9 @@ export default function LoginScreen({navigation}){
                     cursorColor='black'
                     activeUnderlineColor='#EFE0D6'
                     style={styles.inputAreaText}
+                    secureTextEntry={true}
+                    // onchangeText={(text)=>setPassword(text)}
+                    onChangeText={setPassword}
                     />
                 </View>
 
@@ -68,7 +107,7 @@ export default function LoginScreen({navigation}){
                     style = {styles.loginButton}
                     mode = 'contained'
                     buttonColor = '#88511D'
-                    onPress={()=>navigation.navigate('Landing page')}
+                    onPress={()=>handleLogin({username,password})}
                 >
                 Login</Button>
 
