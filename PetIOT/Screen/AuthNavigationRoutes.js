@@ -7,15 +7,13 @@ import LoginScreen from './LoginScreen';
 import ForgetPasswordScreen from './ForgetPasswordScreen';
 import SignUpScreen from './SignUpScreen';
 
+import DrawerNavigationRoutes from './DrawerNavigationRoutes';
+
 const Stack = createNativeStackNavigator();
+
 
 export default function AuthNavigationRoutes(){
 
-    const isLoggedIn = true;
-
-    if(!isLoggedIn){
-        return 
-    }
 
     return (
         <NavigationContainer>
@@ -23,6 +21,7 @@ export default function AuthNavigationRoutes(){
                 <Stack.Screen name ="LoginScreen" component ={LoginScreen} />
                 <Stack.Screen name = "SignUpScreen" component={SignUpScreen}/>
                 <Stack.Screen name = "ForgetPasswordScreen" component={ForgetPasswordScreen}/>
+                <Stack.Screen name = "Landing page" component={DrawerNavigationRoutes} />
             </Stack.Navigator>
         </NavigationContainer>
     )

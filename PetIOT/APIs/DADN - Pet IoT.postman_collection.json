@@ -1,0 +1,205 @@
+{
+	"info": {
+		"_postman_id": "44963ea3-990f-481d-a690-86f611753169",
+		"name": "DADN - Pet IoT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33962037",
+		"_collection_link": "https://dadn-team.postman.co/workspace/DADN-Workspace~2ad348ee-e24e-4eed-9aa8-29014882f6a6/collection/29097793-44963ea3-990f-481d-a690-86f611753169?action=share&source=collection_link&creator=33962037"
+	},
+	"item": [
+		{
+			"name": "station",
+			"item": [
+				{
+					"name": "newStation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{pet_server}}/v1/station/new",
+							"host": [
+								"{{pet_server}}"
+							],
+							"path": [
+								"v1",
+								"station",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createStation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{pet_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"station_id\": \"dwdsd\",\n    \"box_remain\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{pet_server}}/v1/station/create",
+							"host": [
+								"{{pet_server}}"
+							],
+							"path": [
+								"v1",
+								"station",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getStations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{pet_server}}/v1/station/get",
+							"host": [
+								"{{pet_server}}"
+							],
+							"path": [
+								"v1",
+								"station",
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editStation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"station_id\": \"dsdsd\",\n    \"box_remain\": 10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{pet_server}}/v1/station/edit",
+							"host": [
+								"{{pet_server}}"
+							],
+							"path": [
+								"v1",
+								"station",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"heo1@gmail.com\",\n    \"password\": \"1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pet_server}}/v1/user/login",
+					"host": [
+						"{{pet_server}}"
+					],
+					"path": [
+						"v1",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"heo1@gmail.com\",\n    \"password\": 1,\n    \"firstName\": \"Hưng\",\n    \"lastName\": \"Võ\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pet_server}}/v1/user/register",
+					"host": [
+						"{{pet_server}}"
+					],
+					"path": [
+						"v1",
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getUserInfo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{pet_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{pet_server}}/v1/user/info",
+					"host": [
+						"{{pet_server}}"
+					],
+					"path": [
+						"v1",
+						"user",
+						"info"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

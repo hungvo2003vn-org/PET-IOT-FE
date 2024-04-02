@@ -8,12 +8,12 @@ import AuthNavigationRoutes from './Screen/AuthNavigationRoutes';
 export default function App() {
 
   // Mockup logic mechanism
-  const isLoggedIn = true;
+  const isLoggedIn = false;
   if(!isLoggedIn){
     return (
       <PaperProvider>
         <StatusBar style='dark'/>
-        <AuthNavigationRoutes/>
+        <AuthNavigationRoutes />
       </PaperProvider>
     );
   } else{

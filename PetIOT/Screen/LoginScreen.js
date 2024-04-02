@@ -6,7 +6,7 @@ import UserIcon from "../assets/LoginScreen/account-svgrepo-com 2.svg";
 import PasswordIcon from "../assets/LoginScreen/password-svgrepo-com 2.svg";
 
 
-export default function LoginScreen(){
+export default function LoginScreen({navigation}){
 
     return (
         // OUTER LAYER
@@ -39,6 +39,7 @@ export default function LoginScreen(){
                     selectionColor='#EFE0D6'
                     cursorColor='black'
                     style={styles.inputAreaText}
+                    secureTextEntry={true}
                     />
                 </View>
 
@@ -67,7 +68,7 @@ export default function LoginScreen(){
                     style = {styles.loginButton}
                     mode = 'contained'
                     buttonColor = '#88511D'
-                    onPress={()=>{Alert.alert('this button is pressed')}}
+                    onPress={()=>navigation.navigate('Landing page')}
                 >
                 Login</Button>
 
