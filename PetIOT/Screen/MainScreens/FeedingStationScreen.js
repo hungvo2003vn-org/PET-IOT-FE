@@ -1,9 +1,11 @@
 import React,{useState,useEffect} from 'react';
-import {View,Text,StyleSheet,Alert,ScrollView} from 'react-native';
+import {View,Text,StyleSheet,Alert,ScrollView,FlatList} from 'react-native';
 import {Button, Appbar,Modal,Portal} from 'react-native-paper';
 
 import FeedingStationCard from '../Components/FeedingStation/FeedingStationCard';
 import AddStationModal from '../Components/FeedingStation/AddStationModal';
+import stationLoader from '../../HandlingFunctions/FeedingStation/stationLoader';
+// import FeedingStaionCardLoader from '../Components/FeedingStation/FeedingStationCardLoader';
 
 
 export default function FeedingStationScreen({navigation}){
@@ -11,6 +13,21 @@ export default function FeedingStationScreen({navigation}){
     const [addStationModalVisible,setAddStationModalVisible] = useState(false);
     const showAddStationModal = ()=> setAddStationModalVisible(true);
     const hideAddStationModal = ()=> setAddStationModalVisible(false);
+
+    // STATION LIST RENDERING
+    const [stationList,setStationList] = useState([]);
+
+    useEffect(() => {
+
+        const fetchData = async () =>{
+            const data = await stationLoader();
+            setStationList(data);
+        }
+
+        fetchData();
+        // console.log(stationList);
+
+    }, []); // Empty dependency array: runs only on initial render
 
 
     return (
@@ -28,33 +45,26 @@ export default function FeedingStationScreen({navigation}){
 
             {/* STATIONS DISPLAY */}
             <View>
-                <FeedingStationCard
-                    stationName='Station A'
-                    stationStatus='Online'
-                    stationFoodRemain='100%'
-                    stationChamberRemain='70%'
-                    stationMode='Manual'
-                    stationSound='None'
-                    navigation={navigation}
-                />
-                <FeedingStationCard
-                    stationName='Station B'
-                    stationStatus='Online'
-                    stationFoodRemain='0%'
-                    stationChamberRemain='70%'
-                    stationMode='Auto: 9:00am, 2:00pm'
-                    stationSound="'Woof woof'"
-                    navigation={navigation}
-                />
-                <FeedingStationCard
-                    stationName='Station C'
-                    stationStatus='Offline'
-                    stationFoodRemain='0%'
-                    stationChamberRemain='0%'
-                    stationMode='Auto: 9:00pm'
-                    stationSound="'Meow'"
-                    navigation={navigation}
-                />
+
+                {
+                    stationList.map((station) =>
+                            <FeedingStationCard
+                                stationName = {station.station_id}
+                                stationStatus='Online'
+                                stationFoodRemain='100%'
+                                stationChamberRemain='70%'
+                                stationMode='Manual'
+                                stationSound='None'
+                                station_id={station.station_id}
+                                navigation={navigation}
+                                key={station.station_id}
+                            />
+                        
+                    )
+                    
+                }
+
+                {/* <Text>{stationList.map(station=>console.log(stationList))}</Text> */}
             </View>
 
             <Portal>
@@ -74,6 +84,7 @@ export default function FeedingStationScreen({navigation}){
                     textColor='white'
                     onPress={showAddStationModal}
                 >Add</Button>
+
 
         </ScrollView>
     )
