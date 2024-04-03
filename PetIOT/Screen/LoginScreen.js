@@ -31,8 +31,9 @@ async function saveInformation(userToken){
         }
     })
     .catch(function(error){
-        console.log(error);
-        Alert.alert("Cannot fetch user's information, error: "+error);
+        const errorMessage = error.response?.data?.message || error.response?.statusText;
+        console.error("Error:", errorMessage);
+        Alert.alert("Error happens: "+errorMessage);
         return;
     })
 
@@ -63,9 +64,10 @@ async function handleLogin({username,password}){
 
     })
     .catch(function(error){
-        console.log(error);
-        Alert.alert('Error happens, error: '+error);
-        return
+        const errorMessage = error.response?.data?.message || error.response?.statusText;
+        console.error("Error:", errorMessage);
+        Alert.alert("Error happens: "+errorMessage);
+        return;
     })
 
 
