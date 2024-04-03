@@ -8,6 +8,7 @@ import * as Updates from 'expo-updates';
 async function signOutHandler(){
     SecureStore.deleteItemAsync('accessToken');
     SecureStore.deleteItemAsync('refreshToken');
+    SecureStore.deleteItemAsync('userInformation');
     await Updates.reloadAsync();
 
 }

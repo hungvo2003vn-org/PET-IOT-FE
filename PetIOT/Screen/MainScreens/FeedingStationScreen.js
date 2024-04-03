@@ -1,10 +1,18 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import {View,Text,StyleSheet,Alert,ScrollView} from 'react-native';
-import {Button, Appbar} from 'react-native-paper';
+import {Button, Appbar,Modal,Portal} from 'react-native-paper';
+
 import FeedingStationCard from '../Components/FeedingStation/FeedingStationCard';
+import AddStationModal from '../Components/FeedingStation/AddStationModal';
 
 
 export default function FeedingStationScreen({navigation}){
+    //ADD FEED STATION BOX
+    const [addStationModalVisible,setAddStationModalVisible] = useState(false);
+    const showAddStationModal = ()=> setAddStationModalVisible(true);
+    const hideAddStationModal = ()=> setAddStationModalVisible(false);
+
+
     return (
         //OUTER LAYER
         <ScrollView style={styles.container}>
@@ -49,13 +57,23 @@ export default function FeedingStationScreen({navigation}){
                 />
             </View>
 
+            <Portal>
+                <Modal
+                    visible={addStationModalVisible}
+                    onDismiss={hideAddStationModal}
+                >
+                    <AddStationModal
+                        hideAddStationModal={hideAddStationModal}
+                    ></AddStationModal>
+                </Modal>
+            </Portal>
+
             <Button 
-                style={styles.addButton}
-                buttonColor='#88511D'
-                textColor='white'
-
-            >Add</Button>
-
+                    style={styles.addButton}
+                    buttonColor='#88511D'
+                    textColor='white'
+                    onPress={showAddStationModal}
+                >Add</Button>
 
         </ScrollView>
     )

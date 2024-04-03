@@ -10,11 +10,40 @@ import Logo from "../assets/common/logo.svg";
 import UserIcon from "../assets/LoginScreen/account-svgrepo-com 2.svg";
 import PasswordIcon from "../assets/LoginScreen/password-svgrepo-com 2.svg";
 
-const EXPO_PUBLIC_API_URL="https://pet-iot-be.onrender.com"
+const EXPO_PUBLIC_API_URL="https://pet-iot-be.onrender.com";
+
+async function saveInformation(userToken){
+    // SAVE USER INFORMATION
+    await axios.get(`${EXPO_PUBLIC_API_URL}/v1/user/info`,{
+        headers:{
+            'Authorization':'Bearer '+userToken 
+        }
+    })
+    .then(function(response){
+        const data = JSON.stringify(response.data.data);
+        if (data){
+            SecureStore.setItem('userInformation',data);
+            console.log(data);
+            Updates.reloadAsync();
+        }   else{
+            Alert.alert("Cannot fetch user's information");
+            return;
+        }
+    })
+    .catch(function(error){
+        console.log(error);
+        Alert.alert("Cannot fetch user's information, error: "+error);
+        return;
+    })
+
+}
 
 async function handleLogin({username,password}){
+    var userToken='';
+    Alert.alert('Processing...');
 
-    axios.post(`${EXPO_PUBLIC_API_URL}/v1/user/login`,{
+    //VERIFY USER INFORMATION
+    await axios.post(`${EXPO_PUBLIC_API_URL}/v1/user/login`,{
         email:`${username}`,
         password:`${password}`
     })
@@ -22,20 +51,25 @@ async function handleLogin({username,password}){
         const data = (response.data)
 
         if (data){
+            userToken = data.data.accessToken;
             SecureStore.setItem('accessToken',data.data.accessToken);
             SecureStore.setItem('refreshToken',data.data.refreshToken);
-            Updates.reloadAsync();
+            saveInformation(userToken);
         }   else{
             Alert.alert('Error happens');
+            return
         } 
         
 
     })
     .catch(function(error){
-        console.log(error)
-        Alert.alert('Error happens')
+        console.log(error);
+        Alert.alert('Error happens, error: '+error);
+        return
     })
 
+
+    
 }
 
 export default function LoginScreen({navigation,route}){
