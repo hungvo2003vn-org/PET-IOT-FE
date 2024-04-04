@@ -2,20 +2,16 @@
   import { StyleSheet } from 'react-native';
   import { Dropdown } from 'react-native-element-dropdown';
 
-  const data = [
-    { label: 'None', value: '0'},
-    { label: 'Sound 1', value: '1' },
-    { label: 'Sound 2', value: '2' },
-    { label: 'Sound 3', value: '3' },
-    { label: 'Sound 4', value: '4' },
-    { label: 'Sound 5', value: '5' },
-    { label: 'Sound 6', value: '6' },
-    { label: 'Sound 7', value: '7' },
-    { label: 'Sound 8', value: '8' },
-  ];
 
-  const SoundDropdown = () => {
-    const [value, setValue] = useState(null);
+
+  const SoundDropdown = ({stationSound}) => {
+    const [value, setValue] = useState(0);
+
+    const data = [
+      { label: stationSound, value: '0'},
+      { label: 'None', value: '1' },
+
+    ];
 
     return (
       <Dropdown
@@ -30,7 +26,7 @@
         maxHeight={300}
         labelField="label"
         valueField="value"
-        placeholder="Select item"
+        placeholder={stationSound}
         onChange={item => {
           setValue(item.value);
         }}

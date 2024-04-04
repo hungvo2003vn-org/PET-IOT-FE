@@ -9,7 +9,7 @@ import * as Updates from 'expo-updates';
 
 const EXPO_PUBLIC_API_URL="https://pet-iot-be.onrender.com";
 
-async function  updateInfomation(accessToken,hideAddStationModal){
+async function updateInfomation(accessToken,hideAddStationModal){
     // UPDATE USER'S INFORMATION
     await axios.get(`${EXPO_PUBLIC_API_URL}/v1/user/info`,{
         headers:{

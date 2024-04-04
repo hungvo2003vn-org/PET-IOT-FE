@@ -51,13 +51,16 @@ export default function FeedingStationScreen({navigation}){
                             <FeedingStationCard
                                 stationName = {station.station_id}
                                 stationStatus='Online'
-                                stationFoodRemain='100%'
-                                stationChamberRemain='70%'
-                                stationMode='Manual'
-                                stationSound='None'
+                                stationFoodRemain={station.disk_remain+'%'}
+                                stationChamberRemain={station.box_remain+'%'}
+                                stationMode={station.mode? 'Auto':'Manual'}
+                                stationSound={station.soundType}
                                 station_id={station.station_id}
                                 navigation={navigation}
                                 key={station.station_id}
+                                pet_id={station.pet_id}
+                                foodName={station.food_name}
+
                             />
                         
                     )

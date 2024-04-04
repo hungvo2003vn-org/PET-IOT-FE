@@ -45,7 +45,7 @@ export default async function stationLoader(){
         })
 
 
-    // console.log(list[0].data)
+    console.log(list[0].data)
 
     return list[0].data;
 

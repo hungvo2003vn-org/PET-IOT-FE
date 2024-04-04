@@ -5,7 +5,7 @@ import {Button,Card,Text,Switch, Portal, Modal, Chip, TextInput} from 'react-nat
 
 import FeedHistoryModal from './FeedHistoryModal';
 
-export default function BasicInformationCard(){
+export default function BasicInformationCard({foodName,station_id,stationName}){
     //Schedule states
     const [visible, setVisible] = React.useState(false);
     const showModal = () => setVisible(true);
@@ -13,7 +13,13 @@ export default function BasicInformationCard(){
     const containerStyle = {backgroundColor: 'white', padding: 20};
 
     //Food amount states
-    const [text, setText] = React.useState("");
+    const [foodTypeText, setfoodTypeText] = React.useState(`${foodName}`);
+
+    //Station name text
+    const [stationNameText,setStationNameText] = React.useState(`${stationName}`)
+
+    //TEXT (TEMPORARY)
+    const [text,setText] = React.useState('')
 
 
     return (
@@ -26,9 +32,9 @@ export default function BasicInformationCard(){
                     <View style={styles.cardList}>
                         <Text style={styles.cardSetting}>Food type</Text>
                         <TextInput
-                            value={text}
+                            value={foodTypeText}
                             mode='outlined'
-                            onChangeText={text=> setText(text)}
+                            onChangeText={foodTypeText=> setfoodTypeText(foodTypeText)}
                             inputMode = 'numeric'
                             dense='true'
                             style={styles.textInputControl}
@@ -58,9 +64,9 @@ export default function BasicInformationCard(){
                     <View style={styles.cardList}>
                         <Text style={styles.cardSetting}>Station name</Text>
                         <TextInput
-                            value={text}
+                            value={stationNameText}
                             mode='outlined'
-                            onChangeText={text=> setText(text)}
+                            onChangeText={stationNameText=> setStationNameText(stationNameText)}
                             inputMode = 'numeric'
                             dense='true'
                             style={styles.textInputControl}
@@ -74,7 +80,7 @@ export default function BasicInformationCard(){
                     <View style={styles.cardList}>
                         <Text style={styles.cardSetting}>Station ID</Text>
 
-                        <Text style={styles.textInputControl}>123@abc</Text>
+                        <Text style={styles.textInputControl}>{station_id}</Text>
                     </View>            
                     
                     {/* Horizontal line */}

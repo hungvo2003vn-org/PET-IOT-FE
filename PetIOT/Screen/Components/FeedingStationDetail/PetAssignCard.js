@@ -3,7 +3,7 @@ import {View,StyleSheet,Alert,ScrollView, Pressable,TouchableHighlight} from 're
 import {Button,Card,Text,Switch, Portal, Modal, Chip, TextInput} from 'react-native-paper';
 import PetDropdown from './PetDropdown';
 
-export default function PetAssignCard(){
+export default function PetAssignCard({pet_id}){
 
     return (
         <View style={styles.cardContainer}>
@@ -16,7 +16,7 @@ export default function PetAssignCard(){
 
                         {/* Sound options */}
                         <View style={styles.cardControl}>
-                            <PetDropdown />
+                            <PetDropdown pet_id={pet_id} />
                         </View>
                     </View>           
 

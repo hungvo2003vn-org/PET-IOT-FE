@@ -50,9 +50,19 @@ export default function FeedingStationDetailScreen({navigation,route}){
 
             {/* SETTING CATEGORY DISPLAY */}
             <View>
-                <SettingsCard/>
-                <PetAssignCard/>
-                <BasicInformationCard/>
+                <SettingsCard 
+                    stationMode={route.params.stationMode}
+                    stationSound={route.params.stationSound}
+                    foodAmount = {500}
+                />
+                <PetAssignCard 
+                    pet_id={route.params.pet_id}
+                />
+                <BasicInformationCard 
+                    foodName ={route.params.foodName}
+                    station_id={route.params.station_id}
+                    stationName={route.params.stationName}
+                />
                 <StatisticsAndSuggestionsCard/>
             </View>
             <Button 

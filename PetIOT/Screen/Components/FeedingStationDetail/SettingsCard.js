@@ -10,9 +10,9 @@ import FoodAmountIcon from '../../../assets/FeedingStationDetailScreen/food-amou
 import ScheduleModal from './ScheduleModal';
 import SoundDropdown from './SoundDropdown';
 
-export default function SettingsCard(){
+export default function SettingsCard({stationMode,stationSound,foodAmount}){
     // Auto mode states
-    const [isAutoModeOn,setIsAutoModeOn] = React.useState(false);
+    const [isAutoModeOn,setIsAutoModeOn] = React.useState(stationMode==='Auto');
     const onToggleAutoMode = () => setIsAutoModeOn(!isAutoModeOn);
 
     //Schedule states
@@ -22,7 +22,7 @@ export default function SettingsCard(){
     const containerStyle = {backgroundColor: 'white', padding: 20};
 
     //Food amount states
-    const [text, setText] = React.useState("");
+    const [text, setText] = React.useState(`${foodAmount}`);
 
 
     return (
@@ -74,7 +74,7 @@ export default function SettingsCard(){
 
                         {/* Sound options */}
                         <View style={styles.cardControl}>
-                            <SoundDropdown />
+                            <SoundDropdown stationSound={stationSound} />
                         </View>
                     </View>           
 
