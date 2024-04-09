@@ -1,10 +1,32 @@
-import React from 'react';
-import {View,Text,StyleSheet,Alert,ScrollView} from 'react-native';
-import {Button, Appbar} from 'react-native-paper';
+import React,{useState,useEffect} from 'react';
+import {View,Text,StyleSheet,Alert,ScrollView,FlatList} from 'react-native';
+import {Button, Appbar,Modal,Portal} from 'react-native-paper';
 import PetCard from '../Components/Pet/PetCard';
-import TipsBackgroundCard from '../Components/Home/TipsBackgroundCard';
+import AddPetModal from '../Components/Pet/AddPetModal'; 
+import petLoader from '../../HandlingFunctions/Pet/petLoader';
 
 export default function PetScreen({navigation}){
+    
+    //ADD PET BOX
+    const [addPetModalVisible,setAddPetModalVisible] = useState(false);
+    const showAddPetModal = ()=> setAddPetModalVisible(true);
+    const hideAddPetModal = ()=> setAddPetModalVisible(false);
+
+    // PET LIST RENDERING
+    const [petList,setPetList] = useState([]);
+
+    useEffect(() => {
+
+        const fetchData = async () =>{
+            const data = await petLoader();
+            setPetList(data);
+        }
+
+        fetchData();
+
+
+    }, []); // Empty dependency array: runs only on initial render
+    
     return (
         //OUTER LAYER
         <ScrollView style={styles.container}>
@@ -20,38 +42,47 @@ export default function PetScreen({navigation}){
 
             {/* PET DISPLAY */}
             <View>
-                <PetCard
-                    petName='Pet 1'
-                    petStationName='Station A'
-                    petBehavior='Normal'
-                    petWeight='5 kg'
-                    petStatus='Normal'
-                    navigation={navigation}
-                />
-                <PetCard
-                    petName='Pet 2'
-                    petStationName='Station B'
-                    petBehavior='Normal'
-                    petWeight='8 kg'
-                    petStatus='Digest Issues'
-                    navigation={navigation}
-                />
-                <PetCard
-                    petName='Pet 3'
-                    petStationName='Station A'
-                    petBehavior='Normal'
-                    petWeight='10 kg'
-                    petStatus='Normal'
-                    navigation={navigation}
-                />
-                <TipsBackgroundCard/>
+
+                {
+                    petList.map((pet) =>
+                            <PetCard
+                                petName = {pet.pet_id}
+                                petStationName={pet.station_id}
+                                petWeight={'5 kg'}
+                                petStatus={'Normal'}
+                                station_id={pet.station_id}
+                                navigation={navigation}
+                                key={pet.pet_id}
+                                pet_id={pet.pet_id}
+                                species={pet.species}
+                                breed={pet.breed}
+                                birth_year={pet.birth_year}
+                                color={pet.color}
+                            />
+                        
+                    )
+                    
+                }
+
+
             </View>
+
+            <Portal>
+                <Modal
+                    visible={addPetModalVisible}
+                    onDismiss={hideAddPetModal}
+                >
+                    <AddPetModal
+                        hideAddPetModal={hideAddPetModal}
+                    ></AddPetModal>
+                </Modal>
+            </Portal>
 
             <Button 
                 style={styles.addButton}
                 buttonColor='#88511D'
                 textColor='white'
-
+                onPress={showAddPetModal}
             >Add</Button>
 
 
