@@ -2,10 +2,13 @@ import React from 'react';
 import {View,StyleSheet,Alert,ScrollView, Pressable,TouchableHighlight} from 'react-native';
 import {Button,Card,Text} from 'react-native-paper';
 
-export default function FeedingStationCard({stationName,stationStatus,stationFoodRemain,stationChamberRemain, stationMode, stationSound,navigation}){
+import startFeeding from '../../../HandlingFunctions/FeedingStation/startFeeding';
+
+
+export default function FeedingStationCard({stationName,stationStatus,stationFoodRemain,stationChamberRemain, stationMode, stationSound,station_id,navigation,pet_id,foodName}){
     return (
         <Card style={styles.card}>
-            <Pressable onPress={()=>navigation.navigate('FeedingStationDetail',{stationName:stationName,stationStatus:stationStatus})}>
+            <Pressable onPress={()=>navigation.navigate('FeedingStationDetail',{stationName:stationName,stationStatus:stationStatus,stationFoodRemain:stationFoodRemain,stationMode:stationMode,stationSound:stationSound,station_id:station_id,pet_id:pet_id,foodName:foodName})}>
                 <Card.Title 
                     title={stationName}
                     titleStyle={styles.cardTitleStyle}
@@ -47,6 +50,11 @@ export default function FeedingStationCard({stationName,stationStatus,stationFoo
                     style={styles.cardFeedNowButton}
                     buttonColor = '#88511D'
                     textColor='white'
+                    onPress={()=>{
+                        startFeeding(station_id);
+                        Alert.alert("Processing...");
+
+                    }}
                 >Feed now</Button>
                 <Button 
                     style={styles.cardStopFeedingButton}

@@ -1,10 +1,35 @@
-import React from 'react';
-import {View,Text,StyleSheet,Alert,ScrollView} from 'react-native';
-import {Button, Appbar} from 'react-native-paper';
+import React,{useState,useEffect} from 'react';
+import {View,Text,StyleSheet,Alert,ScrollView,FlatList} from 'react-native';
+import {Button, Appbar,Modal,Portal} from 'react-native-paper';
+
 import FeedingStationCard from '../Components/FeedingStation/FeedingStationCard';
+import AddStationModal from '../Components/FeedingStation/AddStationModal';
+import stationLoader from '../../HandlingFunctions/FeedingStation/stationLoader';
+// import FeedingStaionCardLoader from '../Components/FeedingStation/FeedingStationCardLoader';
 
 
 export default function FeedingStationScreen({navigation}){
+    //ADD FEED STATION BOX
+    const [addStationModalVisible,setAddStationModalVisible] = useState(false);
+    const showAddStationModal = ()=> setAddStationModalVisible(true);
+    const hideAddStationModal = ()=> setAddStationModalVisible(false);
+
+    // STATION LIST RENDERING
+    const [stationList,setStationList] = useState([]);
+
+    useEffect(() => {
+
+        const fetchData = async () =>{
+            const data = await stationLoader();
+            setStationList(data);
+        }
+
+        fetchData();
+        // console.log(stationList);
+
+    }, []); // Empty dependency array: runs only on initial render
+
+
     return (
         //OUTER LAYER
         <ScrollView style={styles.container}>
@@ -20,41 +45,48 @@ export default function FeedingStationScreen({navigation}){
 
             {/* STATIONS DISPLAY */}
             <View>
-                <FeedingStationCard
-                    stationName='Station A'
-                    stationStatus='Online'
-                    stationFoodRemain='100%'
-                    stationChamberRemain='70%'
-                    stationMode='Manual'
-                    stationSound='None'
-                    navigation={navigation}
-                />
-                <FeedingStationCard
-                    stationName='Station B'
-                    stationStatus='Online'
-                    stationFoodRemain='0%'
-                    stationChamberRemain='70%'
-                    stationMode='Auto: 9:00am, 2:00pm'
-                    stationSound="'Woof woof'"
-                    navigation={navigation}
-                />
-                <FeedingStationCard
-                    stationName='Station C'
-                    stationStatus='Offline'
-                    stationFoodRemain='0%'
-                    stationChamberRemain='0%'
-                    stationMode='Auto: 9:00pm'
-                    stationSound="'Meow'"
-                    navigation={navigation}
-                />
+
+                {
+                    stationList.map((station) =>
+                            <FeedingStationCard
+                                stationName = {station.station_id}
+                                stationStatus='Online'
+                                stationFoodRemain={station.disk_remain+'%'}
+                                stationChamberRemain={station.box_remain+'%'}
+                                stationMode={station.mode? 'Auto':'Manual'}
+                                stationSound={station.soundType}
+                                station_id={station.station_id}
+                                navigation={navigation}
+                                key={station.station_id}
+                                pet_id={station.pet_id}
+                                foodName={station.food_name}
+
+                            />
+                        
+                    )
+                    
+                }
+
+                {/* <Text>{stationList.map(station=>console.log(stationList))}</Text> */}
             </View>
 
-            <Button 
-                style={styles.addButton}
-                buttonColor='#88511D'
-                textColor='white'
+            <Portal>
+                <Modal
+                    visible={addStationModalVisible}
+                    onDismiss={hideAddStationModal}
+                >
+                    <AddStationModal
+                        hideAddStationModal={hideAddStationModal}
+                    ></AddStationModal>
+                </Modal>
+            </Portal>
 
-            >Add</Button>
+            <Button 
+                    style={styles.addButton}
+                    buttonColor='#88511D'
+                    textColor='white'
+                    onPress={showAddStationModal}
+                >Add</Button>
 
 
         </ScrollView>
