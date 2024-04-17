@@ -2,18 +2,30 @@ import React from 'react';
 import {View,StyleSheet,Alert,ScrollView, Pressable,TouchableHighlight} from 'react-native';
 import {Button,Card,Text} from 'react-native-paper';
 
+
 import startFeeding from '../../../HandlingFunctions/FeedingStation/startFeeding';
 
+import FeedingStationCardTitle from './FeedingStationCardTitle';
 
 export default function FeedingStationCard({stationName,stationStatus,stationFoodRemain,stationChamberRemain, stationMode, stationSound,station_id,navigation,pet_id,foodName}){
     return (
         <Card style={styles.card}>
-            <Pressable onPress={()=>navigation.navigate('FeedingStationDetail',{stationName:stationName,stationStatus:stationStatus,stationFoodRemain:stationFoodRemain,stationMode:stationMode,stationSound:stationSound,station_id:station_id,pet_id:pet_id,foodName:foodName})}>
+            <Pressable onPress={()=>navigation.navigate('FeedingStationDetail',
+                                                        {stationName:stationName,
+                                                        stationStatus:stationStatus,
+                                                        stationFoodRemain:stationFoodRemain,
+                                                        stationMode:stationMode,
+                                                        stationSound:stationSound,
+                                                        station_id:station_id,
+                                                        pet_id:pet_id,
+                                                        foodName:foodName})}>
                 <Card.Title 
                     title={stationName}
                     titleStyle={styles.cardTitleStyle}
                     subtitle={stationStatus}
                     subtitleStyle = {{color: stationStatus == 'Online' ? 'green' : 'red'}}
+                    right ={(props)=> <FeedingStationCardTitle/>}
+
                 />
                 <Card.Content style={styles.cardContent}>
                     {/* Horizontal line */}
@@ -93,6 +105,7 @@ const styles = StyleSheet.create({
         fontWeight: '400',
         lineHeight: 20,
         letterSpacing: 0.25,
+        textAlign:'left',
     },
     informationValue:{
         flex:1,
@@ -102,7 +115,8 @@ const styles = StyleSheet.create({
         fontWeight: '400',
         lineHeight: 20,
         letterSpacing: 0.25,
-        textAlign:'right'
+        textAlign:'right',
+        marginEnd:10,
     },
     cardAction:{
         flex:1,

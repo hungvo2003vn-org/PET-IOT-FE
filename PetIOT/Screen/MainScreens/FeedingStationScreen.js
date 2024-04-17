@@ -25,7 +25,7 @@ export default function FeedingStationScreen({navigation}){
         }
 
         fetchData();
-        // console.log(stationList);
+        // console.log(stationList[0].food_name);
 
     }, []); // Empty dependency array: runs only on initial render
 
@@ -46,13 +46,13 @@ export default function FeedingStationScreen({navigation}){
             {/* STATIONS DISPLAY */}
             <View>
 
-                {
+                {stationList.length !== 0?
                     stationList.map((station) =>
                             <FeedingStationCard
-                                stationName = {station.station_id}
-                                stationStatus='Online'
-                                stationFoodRemain={station.disk_remain+'%'}
-                                stationChamberRemain={station.box_remain+'%'}
+                                stationName = {station.station_name}
+                                stationStatus={station.station_status ? 'Online' : 'Offline'}
+                                stationFoodRemain={station.disk_remain ? (station.disk_remain+'%') : ('0%')}
+                                stationChamberRemain={station.box_remain ? (station.box_remain+'%') : ('0%')}
                                 stationMode={station.mode? 'Auto':'Manual'}
                                 stationSound={station.soundType}
                                 station_id={station.station_id}
@@ -62,8 +62,8 @@ export default function FeedingStationScreen({navigation}){
                                 foodName={station.food_name}
 
                             />
-                        
                     )
+                    : <Text style={styles.noStation}>You have no station</Text>
                     
                 }
 
@@ -126,5 +126,11 @@ const styles = StyleSheet.create({
         marginBottom: 30,
     },
 
+    noStation:{
+        marginBottom:200,
+        marginTop:200,
+        alignSelf:'center',
+
+    }
 
 })

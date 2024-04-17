@@ -14,6 +14,7 @@ export default function AddStationModal({hideAddStationModal}){
     const [mode,setMode] = useState('1');
     const [soundType,setSoundType] = useState('Meow');
     const [pet_id,setPet_id] = useState(null);
+    const [station_name,setStation_name] = useState('');
 
 
 
@@ -24,6 +25,14 @@ export default function AddStationModal({hideAddStationModal}){
                 label="Station ID"
                 value={station_id}
                 onChangeText={station_id=>setStation_id(station_id)}
+                style={styles.textInput}
+            >
+            </TextInput>
+
+            <TextInput
+                label="Station name"
+                value={station_name}
+                onChangeText={station_name=>setStation_name(station_name)}
                 style={styles.textInput}
             >
             </TextInput>
@@ -91,7 +100,7 @@ export default function AddStationModal({hideAddStationModal}){
                 style={styles.button}
                 onPress={async ()=>{
                     Alert.alert('Processing');
-                    await addStation({station_id,box_volumn,box_remain,food_name,disk_remain,mode,soundType,pet_id},hideAddStationModal)
+                    await addStation({station_id,box_volumn,box_remain,food_name,disk_remain,mode,soundType,pet_id,station_name},hideAddStationModal)
                 }}
         
             >

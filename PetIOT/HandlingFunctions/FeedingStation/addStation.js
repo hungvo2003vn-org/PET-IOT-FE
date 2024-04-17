@@ -46,6 +46,7 @@ export default async function addStation(data,hideAddStationModal){
 
     const request_data = {
         "station_id": `${data.station_id}`,
+        "station_name": `${data.station_name}`,
         "box_volumn": `${data.box_volumn}`,
         "box_remain": `${data.box_remain}`,
         "food_name": `${data.food_name}`,

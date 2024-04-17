@@ -16,7 +16,7 @@
     "@react-navigation/native-stack": "^6.9.26",
     "axios": "^1.6.8",
     "babel-plugin-inline-dotenv": "^1.7.0",
-    "expo": "~50.0.14",
+    "expo": "^50.0.17",
     "expo-secure-store": "~12.8.1",
     "expo-status-bar": "~1.11.1",
     "expo-updates": "~0.24.12",
