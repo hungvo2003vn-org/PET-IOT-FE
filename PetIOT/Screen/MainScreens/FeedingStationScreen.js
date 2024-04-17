@@ -1,11 +1,12 @@
 import React,{useState,useEffect} from 'react';
 import {View,Text,StyleSheet,Alert,ScrollView,FlatList} from 'react-native';
-import {Button, Appbar,Modal,Portal} from 'react-native-paper';
+import {Button, Appbar,Modal,Portal, ActivityIndicator} from 'react-native-paper';
 
 import FeedingStationCard from '../Components/FeedingStation/FeedingStationCard';
 import AddStationModal from '../Components/FeedingStation/AddStationModal';
 import stationLoader from '../../HandlingFunctions/FeedingStation/stationLoader';
 // import FeedingStaionCardLoader from '../Components/FeedingStation/FeedingStationCardLoader';
+import fetchStation from '../../HandlingFunctions/FeedingStation/fetchStation';
 
 
 export default function FeedingStationScreen({navigation}){
@@ -17,22 +18,29 @@ export default function FeedingStationScreen({navigation}){
     // STATION LIST RENDERING
     const [stationList,setStationList] = useState([]);
 
+    const fetchData = async () =>{
+        const data = await stationLoader();
+        setStationList(data);
+        // console.log("Data fetched")
+    }
+
     useEffect(() => {
 
-        const fetchData = async () =>{
-            const data = await stationLoader();
-            setStationList(data);
-        }
 
-        fetchData();
+
+        fetchStation({setStationList});
         // console.log(stationList[0].food_name);
 
     }, []); // Empty dependency array: runs only on initial render
 
 
+
+
+
     return (
         //OUTER LAYER
         <ScrollView style={styles.container}>
+            {/* <ActivityIndicator/> */}
 
             {/* APP BAR */}
             <Appbar.Header mode='large' style={styles.appBar}>
@@ -45,6 +53,7 @@ export default function FeedingStationScreen({navigation}){
 
             {/* STATIONS DISPLAY */}
             <View>
+
 
                 {stationList.length !== 0?
                     stationList.map((station) =>
@@ -63,7 +72,7 @@ export default function FeedingStationScreen({navigation}){
 
                             />
                     )
-                    : <Text style={styles.noStation}>You have no station</Text>
+                    : <Text style={styles.noStation}>No station to show</Text>
                     
                 }
 
@@ -77,6 +86,8 @@ export default function FeedingStationScreen({navigation}){
                 >
                     <AddStationModal
                         hideAddStationModal={hideAddStationModal}
+                        onFinish={fetchStation}
+                        setStationList={setStationList}
                     ></AddStationModal>
                 </Modal>
             </Portal>

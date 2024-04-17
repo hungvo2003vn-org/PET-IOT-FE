@@ -6,7 +6,7 @@ const FEED_AMOUNT= 10;
 
 const EXPO_PUBLIC_API_URL="https://pet-iot-be.onrender.com";
 
-export default async function startFeeding(station_id){
+export default async function startFeeding({stationName,station_id}){
     //GET USER TOKEN
     const accessToken = SecureStore.getItem('accessToken');
     
@@ -26,16 +26,16 @@ export default async function startFeeding(station_id){
     .then(function(response){
         const data = response.data;
         if(data){
-            Alert.alert("Done");
+            Alert.alert(`Task complete on station ${stationName}`);
         }   else{
-            Alert.alert('Error happens');
+            Alert.alert(`Error happens on station ${stationName}`);
             return;
         }
     })
     .catch(function(error){
         const errorMessage = error.response?.data?.message || error.response?.statusText;
         console.error("Error:", errorMessage);
-        Alert.alert("Error happens: "+errorMessage);
+        Alert.alert(`Error on "${stationName}" `+errorMessage);
         return;
     })
 

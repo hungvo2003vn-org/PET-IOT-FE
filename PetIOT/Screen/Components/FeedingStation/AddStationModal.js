@@ -1,11 +1,12 @@
 import React,{useState,useEffect} from 'react';
 import {View,StyleSheet,Alert,ScrollView, Pressable,TouchableHighlight} from 'react-native';
 import {Button,Card,Text,Modal,TextInput} from 'react-native-paper';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 import addStation from '../../../HandlingFunctions/FeedingStation/addStation';
 
 
-export default function AddStationModal({hideAddStationModal}){
+export default function AddStationModal({hideAddStationModal,onFinish,setStationList}){
     const [station_id,setStation_id] = useState('');
     const [box_volumn,setBox_volumn] = useState('1');
     const [box_remain,setBox_remain] = useState('2');
@@ -15,12 +16,16 @@ export default function AddStationModal({hideAddStationModal}){
     const [soundType,setSoundType] = useState('Meow');
     const [pet_id,setPet_id] = useState(null);
     const [station_name,setStation_name] = useState('');
+    const [spinnerVisibility, setSpinnerVisibility] = useState(false);
 
 
 
     return (
         <ScrollView style={styles.container}>
             <Text>Add station</Text>
+            <Spinner
+                visible={spinnerVisibility}
+            />
             <TextInput
                 label="Station ID"
                 value={station_id}
@@ -99,8 +104,9 @@ export default function AddStationModal({hideAddStationModal}){
                 mode={'contained'}
                 style={styles.button}
                 onPress={async ()=>{
-                    Alert.alert('Processing');
-                    await addStation({station_id,box_volumn,box_remain,food_name,disk_remain,mode,soundType,pet_id,station_name},hideAddStationModal)
+                    setSpinnerVisibility(true);
+                    await addStation({station_id,box_volumn,box_remain,food_name,disk_remain,mode,soundType,pet_id,station_name,setSpinnerVisibility},hideAddStationModal)
+                    await onFinish({setStationList});
                 }}
         
             >

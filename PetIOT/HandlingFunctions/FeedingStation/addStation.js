@@ -69,6 +69,7 @@ export default async function addStation(data,hideAddStationModal){
         .then(function(response){
             const data = response.data;
             if(data){
+                data.setSpinnerVisibility(false)
                 //UPDATE USER'S INFORMATION
                 updateInfomation(accessToken,hideAddStationModal);
             }   else{
@@ -77,6 +78,7 @@ export default async function addStation(data,hideAddStationModal){
             }
         })
         .catch(function(error){
+            data.setSpinnerVisibility(false)
             const errorMessage = error.response?.data?.message || error.response?.statusText;
             console.error("Error:", errorMessage);
             Alert.alert("Error happens: "+errorMessage);

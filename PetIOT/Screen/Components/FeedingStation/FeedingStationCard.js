@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View,StyleSheet,Alert,ScrollView, Pressable,TouchableHighlight} from 'react-native';
-import {Button,Card,Text} from 'react-native-paper';
+import {Button,Card,Text,ActivityIndicator} from 'react-native-paper';
 
 
 import startFeeding from '../../../HandlingFunctions/FeedingStation/startFeeding';
@@ -8,6 +8,8 @@ import startFeeding from '../../../HandlingFunctions/FeedingStation/startFeeding
 import FeedingStationCardTitle from './FeedingStationCardTitle';
 
 export default function FeedingStationCard({stationName,stationStatus,stationFoodRemain,stationChamberRemain, stationMode, stationSound,station_id,navigation,pet_id,foodName}){
+    const [spinnerVisibility, setSpinnerVisibility] = useState(false);
+
     return (
         <Card style={styles.card}>
             <Pressable onPress={()=>navigation.navigate('FeedingStationDetail',
@@ -63,8 +65,9 @@ export default function FeedingStationCard({stationName,stationStatus,stationFoo
                     buttonColor = '#88511D'
                     textColor='white'
                     onPress={()=>{
-                        startFeeding(station_id);
+                        startFeeding({stationName,station_id});
                         Alert.alert("Processing...");
+                        // setSpinnerVisibility(true);
 
                     }}
                 >Feed now</Button>

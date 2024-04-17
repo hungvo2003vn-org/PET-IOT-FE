@@ -4,6 +4,7 @@ import {Button } from 'react-native-paper';
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
 import * as Updates from 'expo-updates';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 
 import Logo from "../assets/common/logo.svg";
@@ -39,9 +40,9 @@ async function saveInformation(userToken){
 
 }
 
-async function handleLogin({username,password}){
+async function handleLogin({username,password,setSpinnerVisibility}){
     var userToken='';
-    Alert.alert('Processing...');
+    // Alert.alert('Processing...');
 
     //VERIFY USER INFORMATION
     await axios.post(`${EXPO_PUBLIC_API_URL}/v1/user/login`,{
@@ -49,6 +50,7 @@ async function handleLogin({username,password}){
         password:`${password}`
     })
     .then(function(response){
+        setSpinnerVisibility(false)
         const data = (response.data)
 
         if (data){
@@ -64,6 +66,7 @@ async function handleLogin({username,password}){
 
     })
     .catch(function(error){
+        setSpinnerVisibility(false)
         const errorMessage = error.response?.data?.message || error.response?.statusText;
         console.error("Error:", errorMessage);
         Alert.alert("Error happens: "+errorMessage);
@@ -78,11 +81,15 @@ export default function LoginScreen({navigation,route}){
     const [username,setUsername] = useState('');
     const [password,setPassword] = useState('');
     const [error,setError] = useState(null);
+    const [spinnerVisibility, setSpinnerVisibility] = useState(false);
 
 
     return (
         // OUTER LAYER
         <ScrollView style = {styles.container}>
+            <Spinner
+                visible={spinnerVisibility}
+            />
             {/* APP LOGO STACK */}
             <View style={styles.logo} >
                 <Logo />
@@ -143,7 +150,10 @@ export default function LoginScreen({navigation,route}){
                     style = {styles.loginButton}
                     mode = 'contained'
                     buttonColor = '#88511D'
-                    onPress={()=>handleLogin({username,password})}
+                    onPress={()=>{
+                        handleLogin({username,password,setSpinnerVisibility})
+                        setSpinnerVisibility(true);
+                    }}
                 >
                 Login</Button>
 
