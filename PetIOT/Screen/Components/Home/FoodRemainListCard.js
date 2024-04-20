@@ -58,4 +58,9 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: '#f0f0f0',
     },
+    boldText: {
+        fontWeight: 'bold',
+        fontFamily: 'Roboto',
+        fontSize: 20,
+    },
 });

@@ -5,7 +5,6 @@ import TipsListCard from './TipsListCard';
 export default function TipsBackgroundCard() {
     return (
         <View style={styles.card}>
-            <Text style = {styles.boldText}>Tips</Text>
             <TipsListCard />
         </View>
     );

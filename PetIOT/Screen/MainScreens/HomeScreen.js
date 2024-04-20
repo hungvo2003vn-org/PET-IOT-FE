@@ -35,7 +35,9 @@ export default function HomeScreen() {
           </ScrollView>
 
           {/* Other Components */}
+          <Text style = {styles.boldText}>Food remain</Text>
           <FoodRemainBackgroundCard />
+          <Text style = {styles.boldText}>Tips</Text>
           <TipsBackgroundCard />
       </ScrollView>
   );
@@ -51,15 +53,14 @@ const styles = StyleSheet.create({
   logoHeaderContainer: {
       flexDirection: 'row',
       alignItems: 'center',
-      marginBottom: 20,
-      marginTop: 10,
+      marginBottom: 10,
   },
   logoContainer: {
       marginRight: 10,
+      marginLeft: 10,
   },
   header: {
       flex: 1,
-      marginTop: 20,
       marginBottom: 10,
   },
   headerText: {
@@ -74,5 +75,10 @@ const styles = StyleSheet.create({
       height: 205,
       borderRadius: 10,
       marginRight: 10,
+  },
+  boldText: {
+    fontWeight: 'bold',
+    fontFamily: 'Roboto',
+    fontSize: 20,
   },
 });

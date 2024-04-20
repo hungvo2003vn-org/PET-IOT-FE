@@ -5,7 +5,6 @@ import FoodRemainListCard from './FoodRemainListCard';
 export default function FoodRemainBackgroundCard() {
     return (
         <View style={styles.card}>
-            <Text style = {styles.boldText}>Food remain</Text>
             <FoodRemainListCard />
         </View>
     );
@@ -15,7 +14,7 @@ const styles = StyleSheet.create({
     card: {
         backgroundColor: '#FFF1E8',
         margin: 6,
-        marginTop: 20,
+        marginTop: 10,
         borderRadius: 12, 
         overflow: 'hidden', 
     },
