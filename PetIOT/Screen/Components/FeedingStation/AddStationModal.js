@@ -1,19 +1,29 @@
 import React,{useState,useEffect} from 'react';
 import {View,StyleSheet,Alert,ScrollView, Pressable,TouchableHighlight} from 'react-native';
-import {Button,Card,Text,Modal,TextInput} from 'react-native-paper';
+import {Button,Card,Text,Modal,TextInput,Switch} from 'react-native-paper';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 import addStation from '../../../HandlingFunctions/FeedingStation/addStation';
 
 
+function valueCheck(data){
+    for (item in data){
+        if (data[item].length == 0){
+            Alert.alert(`${item} cannot be empty`)
+            return;
+        }
+    }
+}
+
+
 export default function AddStationModal({hideAddStationModal,onFinish,setStationList}){
     const [station_id,setStation_id] = useState('');
-    const [box_volumn,setBox_volumn] = useState('1');
-    const [box_remain,setBox_remain] = useState('2');
-    const [food_name,setFood_name] = useState('Cat food');
-    const [disk_remain,setDisk_remain] = useState('3');
-    const [mode,setMode] = useState('1');
-    const [soundType,setSoundType] = useState('Meow');
+    const [box_volumn,setBox_volumn] = useState('');
+    const [box_remain,setBox_remain] = useState('');
+    const [food_name,setFood_name] = useState('');
+    const [disk_remain,setDisk_remain] = useState('');
+    const mode = false
+    const [soundType,setSoundType] = useState('');
     const [pet_id,setPet_id] = useState(null);
     const [station_name,setStation_name] = useState('');
     const [spinnerVisibility, setSpinnerVisibility] = useState(false);
@@ -22,7 +32,7 @@ export default function AddStationModal({hideAddStationModal,onFinish,setStation
 
     return (
         <ScrollView style={styles.container}>
-            <Text>Add station</Text>
+            <Text style={styles.addStationText}>Add station</Text>
             <Spinner
                 visible={spinnerVisibility}
             />
@@ -73,14 +83,15 @@ export default function AddStationModal({hideAddStationModal,onFinish,setStation
                 style={styles.textInput}
             >
             </TextInput>
-
+{/* 
             <TextInput
                 label="Mode"
                 value={mode}
                 onChangeText={mode=>setMode(mode)}
                 style={styles.textInput}
             >
-            </TextInput>
+            </TextInput> */}
+
 
             <TextInput
                 label="Sound type"
@@ -104,9 +115,10 @@ export default function AddStationModal({hideAddStationModal,onFinish,setStation
                 mode={'contained'}
                 style={styles.button}
                 onPress={async ()=>{
-                    setSpinnerVisibility(true);
-                    await addStation({station_id,box_volumn,box_remain,food_name,disk_remain,mode,soundType,pet_id,station_name,setSpinnerVisibility},hideAddStationModal)
-                    await onFinish({setStationList});
+                    // setSpinnerVisibility(true);
+                    valueCheck({station_id, box_volumn, box_remain, food_name, disk_remain, station_name})
+                    // await addStation({station_id,box_volumn,box_remain,food_name,disk_remain,mode,soundType,pet_id,station_name,setSpinnerVisibility},hideAddStationModal)
+                    // await onFinish({setStationList});
                 }}
         
             >
@@ -119,15 +131,28 @@ export default function AddStationModal({hideAddStationModal,onFinish,setStation
 const styles = StyleSheet.create({
 
     container:{
-        backgroundColor: 'white',
+        backgroundColor:'#FFFFFF',
         padding: 20,
     },
 
     textInput:{
         margin:20,
+        backgroundColor:'#D6C3B6',
     },
 
     button:{
-        margin:40
-    }
+        marginBottom:70,
+        margin:40,
+        backgroundColor:'#51443B',
+    },
+
+    addStationText:{
+        color:'#221A14',
+        fontSize:20,
+        fontFamily:'Roboto',
+        fontWeight:'700',
+        lineHeight:24,
+        letterSpacing:0.15,
+        alignSelf:'center'
+    },
 })

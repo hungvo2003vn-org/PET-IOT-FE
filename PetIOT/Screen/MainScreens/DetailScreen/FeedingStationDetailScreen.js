@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {View,Text,StyleSheet,Alert,ScrollView, Pressable,TouchableHighlight} from 'react-native';
 import {Button, Appbar} from 'react-native-paper';
 import PowerIcon from '../../../assets/FeedingStationDetailScreen/power-button-svgrepo-com 2.svg' 
@@ -9,6 +9,18 @@ import SettingsCard from '../../Components/FeedingStationDetail/SettingsCard';
 import StatisticsAndSuggestionsCard from '../../Components/FeedingStationDetail/StatisticsAndSuggestionsCard';
 
 export default function FeedingStationDetailScreen({navigation,route}){
+    const [changes,setChanges] = useState(false);
+    const [stationMode,setStationMode] = useState(route.params.stationMode);
+    // const [stationMode,setStationMode] = useState(true);
+
+    const [stationSound,setStationSound] = useState(route.params.stationSound);
+    const [foodAmount,setFoodAmount] = useState(500);
+    const [petId,setPetId] = useState(route.params.pet_id);
+    const [foodName,setFoodName] = useState(route.params.foodName);
+    const [stationName,setStationName] = useState(route.params.stationName);
+
+    Alert.alert(route.params);
+
     return (
         //OUTER LAYER
         <ScrollView>
@@ -51,26 +63,43 @@ export default function FeedingStationDetailScreen({navigation,route}){
             {/* SETTING CATEGORY DISPLAY */}
             <View>
                 <SettingsCard 
-                    stationMode={route.params.stationMode}
-                    stationSound={route.params.stationSound}
-                    foodAmount = {500}
+                    stationMode={stationMode}
+                    stationSound={stationSound}
+                    foodAmount = {foodAmount}
+                    setStationMode={setStationMode}
+                    setStationSound={setStationSound}
+                    setFoodAmount={setFoodAmount}
+                    setChanges={setChanges}
+
                 />
                 <PetAssignCard 
-                    pet_id={route.params.pet_id}
+                    pet_id={petId}
                 />
                 <BasicInformationCard 
-                    foodName ={route.params.foodName}
+                    foodName ={foodName}
                     station_id={route.params.station_id}
-                    stationName={route.params.stationName}
+                    stationName={stationName}
                 />
                 <StatisticsAndSuggestionsCard/>
             </View>
+            <View style={styles.buttons}>
+            <Button 
+                disabled={!changes}
+                style={styles.saveChangesButton}
+                buttonColor='#88511D'
+                textColor='white'
+                onPress={()=> {
+                    Alert.alert('You sure bout this?');
+                    setChanges(false)
+                }}
+            >Save changes</Button>
             <Button 
                 style={styles.deleteButton}
                 buttonColor='#BA1A1A'
                 textColor='white'
                 onPress={()=> Alert.alert('You sure bout this?')}
             >Delete</Button>
+            </View>
 
         </ScrollView>
     )
@@ -131,10 +160,26 @@ const styles = StyleSheet.create({
         margin:25,
     },
 
+    buttons:{
+        flexDirection:'row',
+        alignSelf:'center',
+    },
+
     deleteButton:{
-        width:210,
+        width:150,
         alignSelf:'center',
         marginTop: 30,
+        marginLeft: 10,
         marginBottom: 30,
+        alignSelf:'flex-end'
+    },
+
+    saveChangesButton:{
+        width:150,
+        alignSelf:'center',
+        marginTop: 30,
+        marginRight:10,
+        marginBottom: 30,
+        alignSelf:'flex-start'
     }
 })

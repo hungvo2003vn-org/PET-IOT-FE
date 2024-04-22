@@ -9,6 +9,8 @@ import FeedingStationCardTitle from './FeedingStationCardTitle';
 
 export default function FeedingStationCard({stationName,stationStatus,stationFoodRemain,stationChamberRemain, stationMode, stationSound,station_id,navigation,pet_id,foodName}){
     const [spinnerVisibility, setSpinnerVisibility] = useState(false);
+    const mode = stationMode? 'Auto' : 'Manual';
+    
 
     return (
         <Card style={styles.card}>
@@ -48,7 +50,7 @@ export default function FeedingStationCard({stationName,stationStatus,stationFoo
                     {/* Mode display */}
                     <View style={styles.informationDisplayer}>
                         <Text style={styles.informationType}>Mode</Text>
-                        <Text style={styles.informationValue}>{stationMode}</Text>
+                        <Text style={styles.informationValue}>{mode}</Text>
                     </View>
 
                     {/* Sound display */}

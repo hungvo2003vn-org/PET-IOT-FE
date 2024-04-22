@@ -10,10 +10,10 @@ import FoodAmountIcon from '../../../assets/FeedingStationDetailScreen/food-amou
 import ScheduleModal from './ScheduleModal';
 import SoundDropdown from './SoundDropdown';
 
-export default function SettingsCard({stationMode,stationSound,foodAmount}){
-    // Auto mode states
-    const [isAutoModeOn,setIsAutoModeOn] = React.useState(stationMode==='Auto');
-    const onToggleAutoMode = () => setIsAutoModeOn(!isAutoModeOn);
+export default function SettingsCard({stationMode,stationSound,foodAmount,setStationMode,setStationSound,setFoodAmount,setChanges}){
+
+    const initStationMode = stationMode;
+    const [thisStationMode,setThisStationMode] = React.useState(initStationMode);
 
     //Schedule states
     const [visible, setVisible] = React.useState(false);
@@ -35,8 +35,12 @@ export default function SettingsCard({stationMode,stationSound,foodAmount}){
                         <AutoModeIcon style={styles.cardIcon}/>
                         <Text style={styles.cardSetting}>Auto mode</Text>
                         <Switch 
-                            value = {isAutoModeOn}
-                            onValueChange ={onToggleAutoMode}
+                            value = {thisStationMode}
+                            onValueChange ={()=>{
+                                setThisStationMode(!thisStationMode);
+                                setStationMode(!stationMode);
+                                setChanges(true);
+                            }}
                             color = 'black'
                             style={styles.cardControl}
                         />
