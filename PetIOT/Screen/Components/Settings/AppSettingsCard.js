@@ -27,7 +27,7 @@ export default function AppSettingsCard({stationMode,stationSound,foodAmount}){
 
     return (
         <View style={styles.cardContainer}>
-            <Text style = {styles.settingText}>App settings</Text>
+            <Text style = {styles.appSettingsText}>App settings</Text>
             <Card style={styles.card}>
                 <Card.Content style={styles.cardContent}>
                     {/* Notification */}
@@ -61,7 +61,7 @@ export default function AppSettingsCard({stationMode,stationSound,foodAmount}){
                             onPress={showModal}
                             textStyle={styles.chipText}
                             style={styles.chipStyle}
-                        >edit</Chip>
+                        >view</Chip>
                     </View>          
 
                     {/* Horizontal line */}
@@ -79,6 +79,17 @@ export default function AppSettingsCard({stationMode,stationSound,foodAmount}){
                         />
                     </View>          
                     
+                    {/* Horizontal line */}
+                    <View style={{borderBottomColor:'black', borderBottomWidth: 1}}/>
+
+                    <Button 
+                        style={styles.deleteButton}
+                        buttonColor='#BA1A1A'
+                        textColor='white'
+                        onPress={()=> Alert.alert('You sure bout this?')}
+                    >Delete data</Button>
+
+
                 </Card.Content>
             </Card>
         </View>
@@ -127,7 +138,7 @@ const styles = StyleSheet.create({
         textAlignVertical:'center'
     },
 
-    settingText:{
+    appSettingsText:{
         color:'black',
         fontSize:14,
         fontFamily: 'Roboto',
@@ -141,6 +152,10 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         height:50,
     },
-
+    deleteButton:{
+        width:121,
+        alignSelf:'center',
+        marginTop: 15,
+    },
 
 })

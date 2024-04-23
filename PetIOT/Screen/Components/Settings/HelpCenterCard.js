@@ -26,7 +26,7 @@ export default function UserAccountCard({stationMode,stationSound,foodAmount}){
 
     return (
         <View style={styles.cardContainer}>
-            <Text style = {styles.settingText}>Help Center</Text>
+            <Text style = {styles.helpCenterText}>Help Center</Text>
             <Card style={styles.card}>
                 <Card.Content style={styles.cardContent}>         
                     {/* FAQs */}
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
         textAlignVertical:'center'
     },
 
-    settingText:{
+    helpCenterText:{
         color:'black',
         fontSize:14,
         fontFamily: 'Roboto',

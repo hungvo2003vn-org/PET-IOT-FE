@@ -21,7 +21,7 @@ export default function UserAccountCard({stationMode,stationSound,foodAmount}){
 
     return (
         <View style={styles.cardContainer}>
-            <Text style = {styles.settingText}>User account</Text>
+            <Text style = {styles.userAccountText}>User account</Text>
             <Card style={styles.card}>
                 <Card.Content style={styles.cardContent}>         
                     {/* Username */}
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
         textAlignVertical:'center'
     },
 
-    settingText:{
+    userAccountText:{
         color:'black',
         fontSize:14,
         fontFamily: 'Roboto',
