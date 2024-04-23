@@ -35,9 +35,9 @@ export default function HomeScreen() {
           </ScrollView>
 
           {/* Other Components */}
-          <Text style = {styles.boldText}>Food remain</Text>
+          <Text style = {styles.tipsText}>Food remain</Text>
           <FoodRemainBackgroundCard />
-          <Text style = {styles.boldText}>Tips</Text>
+          <Text style = {styles.tipsText}>Tips</Text>
           <TipsBackgroundCard />
       </ScrollView>
   );
@@ -66,9 +66,11 @@ const styles = StyleSheet.create({
   headerText: {
       fontSize: 24,
       fontWeight: 'bold',
+      fontFamily: 'Roboto',
   },
   imageScrollView: {
       marginVertical: 10,
+      marginBottom: 20,
   },
   image: {
       width: 264,
@@ -76,9 +78,13 @@ const styles = StyleSheet.create({
       borderRadius: 10,
       marginRight: 10,
   },
-  boldText: {
-    fontWeight: 'bold',
+  tipsText: {
+    color: 'black',
+    fontSize: 14,
     fontFamily: 'Roboto',
-    fontSize: 20,
-  },
+    fontWeight: '700', 
+    lineHeight: 20,
+    letterSpacing: 0.10,
+    marginLeft: 10,
+},
 });

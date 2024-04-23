@@ -31,10 +31,11 @@ export default function FoodRemainListCard() {
         <View style={styles.container}>
             {displayedStations.map((station) => (
                 <FoodRemainCard
-                    key={station.station_id} // Ensure a unique key for each item
-                    stationName={station.station_id}
-                    stationStatus='Online'
-                    stationFoodRemain='100%'
+                    key={station.station_id} 
+                    stationName={station.station_name}
+                    stationMode={station.mode? 'Auto':'Manual'}
+                    stationFoodRemain={station.disk_remain+'%'}
+                    stationFoodType={station.food_name}
                 />
             ))}
             {stationList.length > 3 && (
@@ -50,17 +51,12 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingVertical: 20,
-        paddingHorizontal: 10, // Adjust padding as needed
+        paddingHorizontal: 10, 
     },
     toggleButton: {
         alignItems: 'center',
         justifyContent: 'center',
         padding: 10,
         backgroundColor: '#f0f0f0',
-    },
-    boldText: {
-        fontWeight: 'bold',
-        fontFamily: 'Roboto',
-        fontSize: 20,
     },
 });

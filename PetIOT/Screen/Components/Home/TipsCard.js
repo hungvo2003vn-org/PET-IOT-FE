@@ -6,7 +6,7 @@ export default function TipsCard({ title, description }) {
     return (
         <Card style={styles.card}>
             <Card.Title
-                title={<Text style={styles.boldText}>{title}</Text>}
+                title={title}
                 titleStyle={styles.cardTitleStyle}
             />
             <Card.Content style={styles.cardContent}>
@@ -22,20 +22,22 @@ const styles = StyleSheet.create({
     card: {
         backgroundColor: '#FFDCC2',
         margin: 6,
-        marginTop: 20,
+        marginTop: 10,
     },
     cardTitleStyle: {
         color: '#221A14',
         fontSize: 16,
         fontFamily: 'Roboto',
-        fontWeight: '600',
-        lineHeight: 24,
+        fontWeight: '700',
+        lineHeight: 20,
         letterSpacing: 0.15,
+        
     },
     informationDisplayer: {
         flexDirection: 'row',
         width: '100%',
         margin: 10,
+        marginTop: -5,
     },
     informationType: {
         flex: 1,
@@ -45,10 +47,20 @@ const styles = StyleSheet.create({
         fontWeight: '400',
         lineHeight: 20,
         letterSpacing: 0.25,
-        textAlign: 'left',
     },
-    boldText: {
-        fontWeight: 'bold',
-        fontFamily: 'Roboto',
+    informationValue:{
+        flex:1,
+        color:'#221A14',
+        fontSize: 14,
+        fontFamily:'Roboto',
+        fontWeight: '400',
+        lineHeight: 20,
+        letterSpacing: 0.25,
+        textAlign:'right'
+    },
+    foodRemainContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingHorizontal: 10,
     },
 });

@@ -18,9 +18,13 @@ const styles = StyleSheet.create({
         borderRadius: 12, 
         overflow: 'hidden', 
     },
-    boldText: {
-        fontWeight: 'bold',
+    appSettingsText: {
+        color: 'black',
+        fontSize: 14,
         fontFamily: 'Roboto',
-        fontSize: 20,
+        fontWeight: '700', 
+        lineHeight: 20,
+        letterSpacing: 0.10,
+        marginLeft: 10,
     },
 });
