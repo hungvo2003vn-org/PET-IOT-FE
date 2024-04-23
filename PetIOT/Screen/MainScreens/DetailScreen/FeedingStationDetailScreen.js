@@ -114,7 +114,7 @@ export default function FeedingStationDetailScreen({navigation,route}){
                 buttonColor='#88511D'
                 textColor='white'
                 onPress={async ()=> {
-                    setSpinnerVisibility(true);
+                    // setSpinnerVisibility(true);
                     console.log("Changes found: stationMode = "+stationMode +" foodAmount = "+foodAmount +" stationName = " +stationName + " foodName = " + foodName);
                     Alert.alert("Processing...");
                     valueCheck({
@@ -133,10 +133,10 @@ export default function FeedingStationDetailScreen({navigation,route}){
                         "mode":stationMode,
                         "soundType":null,
                         "pet_id":null,
-                        "setSpinnerVisibility":setSpinnerVisibility
+                        // "setSpinnerVisibility":setSpinnerVisibility
                     });
-                    
-                    await fetchStation({setStationList:route.params.setStationList})
+                    // console.log("This is station mode: " + typeof(stationMode))
+                    // await fetchStation(route.params.setStationList);
 
                     setChanges(false);
 

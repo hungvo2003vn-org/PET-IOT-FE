@@ -43,7 +43,7 @@ export default function BasicInformationCard({
                                 setChanges(true);
                                 setFoodName(foodName);
                             }}
-                            inputMode = 'numeric'
+                            inputMode = 'text'
                             dense='true'
                             style={styles.textInputControl}
                         />
@@ -59,7 +59,7 @@ export default function BasicInformationCard({
                             value={text}
                             mode='outlined'
                             onChangeText={text=> setText(text)}
-                            inputMode = 'numeric'
+                            inputMode = 'text'
                             dense='true'
                             style={styles.textInputControl}
                         />
@@ -78,7 +78,7 @@ export default function BasicInformationCard({
                                 setChanges(true);
                                 setStationName(stationName);
                             }}
-                            inputMode = 'numeric'
+                            inputMode = 'text'
                             dense='true'
                             style={styles.textInputControl}
                         />

@@ -23,7 +23,7 @@ export default async function editStation(data){
         "box_remain": null,
         "food_name": `${data.food_name}`,
         "disk_remain": null,
-        "mode": data.stationMode,
+        "mode": data.mode,
         "soundType": null,
         "pet_id": null
     }
@@ -41,18 +41,19 @@ export default async function editStation(data){
         .then(function(response){
             const data = response.data;
             if(data){
-                data.setSpinnerVisibility(false);
+                // data.setSpinnerVisibility(false);
+                // console.log(request_data);
                 Alert.alert("Changes applied");
                 return;
 
             }   else{
-                data.setSpinnerVisibility(false);
+                // data.setSpinnerVisibility(false);
                 Alert.alert('Error happens');
                 return;
             }
         })
         .catch(function(error){
-            data.setSpinnerVisibility(false);
+            // data.setSpinnerVisibility(false);
             const errorMessage = error.response?.data?.message || error.response?.statusText;
             console.error("Error:", errorMessage);
             Alert.alert("Error happens: "+errorMessage);
