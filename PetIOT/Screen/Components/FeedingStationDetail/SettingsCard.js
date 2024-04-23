@@ -10,7 +10,14 @@ import FoodAmountIcon from '../../../assets/FeedingStationDetailScreen/food-amou
 import ScheduleModal from './ScheduleModal';
 import SoundDropdown from './SoundDropdown';
 
-export default function SettingsCard({stationMode,stationSound,foodAmount,setStationMode,setStationSound,setFoodAmount,setChanges}){
+export default function SettingsCard({
+    stationMode,
+    stationSound,
+    foodAmount,
+    setStationMode,
+    setStationSound,
+    setFoodAmount,
+    setChanges}){
 
     // const initStationMode = stationMode;
     // const [thisStationMode,setThisStationMode] = React.useState(initStationMode);
@@ -89,9 +96,14 @@ export default function SettingsCard({stationMode,stationSound,foodAmount,setSta
                         <FoodAmountIcon style={styles.cardIcon}/>
                         <Text style={styles.cardSetting}>Food amount (grams)</Text>
                         <TextInput
-                            value={text}
+                            value={String(foodAmount)}
                             mode='outlined'
-                            onChangeText={text=> setText(text)}
+                            onChangeText={(foodAmount)=> {
+                                setChanges(true);
+                                // setText(text);
+                                setFoodAmount(foodAmount);
+
+                            }}
                             inputMode = 'numeric'
                             dense='true'
                             style={styles.textInputControl}

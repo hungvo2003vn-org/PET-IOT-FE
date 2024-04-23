@@ -80,6 +80,9 @@ export default function FeedingStationDetailScreen({navigation,route}){
                     foodName ={foodName}
                     station_id={route.params.station_id}
                     stationName={stationName}
+                    setFoodName={setFoodName}
+                    setStationName={setStationName}
+                    setChanges={setChanges}
                 />
                 <StatisticsAndSuggestionsCard/>
             </View>
@@ -90,7 +93,7 @@ export default function FeedingStationDetailScreen({navigation,route}){
                 buttonColor='#88511D'
                 textColor='white'
                 onPress={()=> {
-                    Alert.alert('You sure bout this?');
+                    console.log("Changes found: stationMode = "+stationMode +" foodAmount = "+foodAmount +" stationName = " +stationName + " foodName = " + foodName);
                     setChanges(false)
                 }}
             >Save changes</Button>

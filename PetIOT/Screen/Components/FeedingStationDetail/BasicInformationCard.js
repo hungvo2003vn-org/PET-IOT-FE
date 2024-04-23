@@ -5,15 +5,20 @@ import {Button,Card,Text,Switch, Portal, Modal, Chip, TextInput} from 'react-nat
 
 import FeedHistoryModal from './FeedHistoryModal';
 
-export default function BasicInformationCard({foodName,station_id,stationName}){
+export default function BasicInformationCard({
+    foodName,
+    station_id,
+    stationName,
+    setFoodName,
+    setStationName,
+    setChanges
+}){
     //Schedule states
     const [visible, setVisible] = React.useState(false);
     const showModal = () => setVisible(true);
     const hideModal = () => setVisible(false);
     const containerStyle = {backgroundColor: 'white', padding: 20};
 
-    //Food amount states
-    const [foodTypeText, setfoodTypeText] = React.useState(`${foodName}`);
 
     //Station name text
     const [stationNameText,setStationNameText] = React.useState(`${stationName}`)
@@ -32,9 +37,12 @@ export default function BasicInformationCard({foodName,station_id,stationName}){
                     <View style={styles.cardList}>
                         <Text style={styles.cardSetting}>Food type</Text>
                         <TextInput
-                            value={foodTypeText}
+                            value={foodName}
                             mode='outlined'
-                            onChangeText={foodTypeText=> setfoodTypeText(foodTypeText)}
+                            onChangeText={(foodName)=> {
+                                setChanges(true);
+                                setFoodName(foodName);
+                            }}
                             inputMode = 'numeric'
                             dense='true'
                             style={styles.textInputControl}
@@ -64,9 +72,12 @@ export default function BasicInformationCard({foodName,station_id,stationName}){
                     <View style={styles.cardList}>
                         <Text style={styles.cardSetting}>Station name</Text>
                         <TextInput
-                            value={stationNameText}
+                            value={stationName}
                             mode='outlined'
-                            onChangeText={stationNameText=> setStationNameText(stationNameText)}
+                            onChangeText={(stationName)=> {
+                                setChanges(true);
+                                setStationName(stationName);
+                            }}
                             inputMode = 'numeric'
                             dense='true'
                             style={styles.textInputControl}
