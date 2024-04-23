@@ -100,7 +100,6 @@ export default function SettingsCard({
                             mode='outlined'
                             onChangeText={(foodAmount)=> {
                                 setChanges(true);
-                                // setText(text);
                                 setFoodAmount(foodAmount);
 
                             }}

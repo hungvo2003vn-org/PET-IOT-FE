@@ -115,10 +115,10 @@ export default function AddStationModal({hideAddStationModal,onFinish,setStation
                 mode={'contained'}
                 style={styles.button}
                 onPress={async ()=>{
-                    // setSpinnerVisibility(true);
+                    setSpinnerVisibility(true);
                     valueCheck({station_id, box_volumn, box_remain, food_name, disk_remain, station_name})
-                    // await addStation({station_id,box_volumn,box_remain,food_name,disk_remain,mode,soundType,pet_id,station_name,setSpinnerVisibility},hideAddStationModal)
-                    // await onFinish({setStationList});
+                    await addStation({station_id,box_volumn,box_remain,food_name,disk_remain,mode,soundType,pet_id,station_name,setSpinnerVisibility},hideAddStationModal)
+                    await onFinish({setStationList});
                 }}
         
             >

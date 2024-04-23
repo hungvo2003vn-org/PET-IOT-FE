@@ -8,6 +8,24 @@ import PetAssignCard from '../../Components/FeedingStationDetail/PetAssignCard';
 import SettingsCard from '../../Components/FeedingStationDetail/SettingsCard';
 import StatisticsAndSuggestionsCard from '../../Components/FeedingStationDetail/StatisticsAndSuggestionsCard';
 
+import editStation from '../../../HandlingFunctions/FeedingStation/editStation';
+import Spinner from 'react-native-loading-spinner-overlay';
+import fetchStation from '../../../HandlingFunctions/FeedingStation/fetchStation';
+
+function valueCheck(data){
+    for (item in data){
+        if (!data[item]){
+            return;
+        }
+        if (data[item].length == 0){
+            Alert.alert(`${item} cannot be empty`)
+            return;
+        }
+    }
+}
+
+
+
 export default function FeedingStationDetailScreen({navigation,route}){
     const [changes,setChanges] = useState(false);
     const [stationMode,setStationMode] = useState(route.params.stationMode==='Auto'?true:false);
@@ -21,11 +39,14 @@ export default function FeedingStationDetailScreen({navigation,route}){
     const [stationName,setStationName] = useState(route.params.stationName);
 
     // Alert.alert(route.params);
+    const [spinnerVisibility, setSpinnerVisibility] = useState(false);
 
     return (
         //OUTER LAYER
         <ScrollView>
-
+            <Spinner
+                visible={spinnerVisibility}
+            />
             {/* APP BAR */}
             <View style={styles.appBarContainer}>
                 <Appbar.Header mode='medium' style={styles.appBar}>
@@ -92,9 +113,33 @@ export default function FeedingStationDetailScreen({navigation,route}){
                 style={styles.saveChangesButton}
                 buttonColor='#88511D'
                 textColor='white'
-                onPress={()=> {
+                onPress={async ()=> {
+                    setSpinnerVisibility(true);
                     console.log("Changes found: stationMode = "+stationMode +" foodAmount = "+foodAmount +" stationName = " +stationName + " foodName = " + foodName);
-                    setChanges(false)
+                    Alert.alert("Processing...");
+                    valueCheck({
+                        "station_id":route.params.station_id,
+                        "station_name":stationName,
+                        "food_name":foodName,
+                        "mode":stationMode,
+                        "soundType":null,
+                        "pet_id":null,
+
+                    })
+                    await editStation({
+                        "station_id":route.params.station_id,
+                        "station_name":stationName,
+                        "food_name":foodName,
+                        "mode":stationMode,
+                        "soundType":null,
+                        "pet_id":null,
+                        "setSpinnerVisibility":setSpinnerVisibility
+                    });
+                    
+                    await fetchStation({setStationList:route.params.setStationList})
+
+                    setChanges(false);
+
                 }}
             >Save changes</Button>
             <Button 

@@ -70,7 +70,8 @@ export default function FeedingStationScreen({navigation}){
                                 key={station.station_id}
                                 pet_id={station.pet_id}
                                 foodName={station.food_name}
-
+                                onFinish={fetchStation}
+                                setStationList={setStationList}
                             />
                     )
                     : <Text style={styles.noStation}>No station to show</Text>

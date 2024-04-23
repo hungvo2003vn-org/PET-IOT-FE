@@ -73,6 +73,7 @@ export default async function addStation(data,hideAddStationModal){
                 //UPDATE USER'S INFORMATION
                 updateInfomation(accessToken,hideAddStationModal);
             }   else{
+                data.setSpinnerVisibility(false);
                 Alert.alert('Error happens');
                 return;
             }
