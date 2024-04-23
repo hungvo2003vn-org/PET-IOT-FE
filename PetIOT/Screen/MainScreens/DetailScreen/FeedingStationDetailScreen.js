@@ -11,6 +11,7 @@ import StatisticsAndSuggestionsCard from '../../Components/FeedingStationDetail/
 import editStation from '../../../HandlingFunctions/FeedingStation/editStation';
 import Spinner from 'react-native-loading-spinner-overlay';
 import fetchStation from '../../../HandlingFunctions/FeedingStation/fetchStation';
+import petAssign from '../../../HandlingFunctions/FeedingStation/petAssign';
 
 function valueCheck(data){
     for (item in data){
@@ -95,7 +96,9 @@ export default function FeedingStationDetailScreen({navigation,route}){
 
                 />
                 <PetAssignCard 
-                    pet_id={petId}
+                    petId={petId}
+                    setChanges={setChanges}
+                    setPetId={setPetId}
                 />
                 <BasicInformationCard 
                     foodName ={foodName}
@@ -123,7 +126,6 @@ export default function FeedingStationDetailScreen({navigation,route}){
                         "food_name":foodName,
                         "mode":stationMode,
                         "soundType":null,
-                        "pet_id":null,
 
                     })
                     await editStation({
@@ -132,11 +134,15 @@ export default function FeedingStationDetailScreen({navigation,route}){
                         "food_name":foodName,
                         "mode":stationMode,
                         "soundType":null,
-                        "pet_id":null,
                         // "setSpinnerVisibility":setSpinnerVisibility
                     });
                     // console.log("This is station mode: " + typeof(stationMode))
                     // await fetchStation(route.params.setStationList);
+
+                    await petAssign({
+                        "station_id":route.params.station_id,
+                        "pet_id" : petId
+                    })
 
                     setChanges(false);
 
