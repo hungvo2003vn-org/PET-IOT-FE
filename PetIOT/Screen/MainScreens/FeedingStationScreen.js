@@ -15,6 +15,7 @@ export default function FeedingStationScreen({navigation}){
     const showAddStationModal = ()=> setAddStationModalVisible(true);
     const hideAddStationModal = ()=> setAddStationModalVisible(false);
 
+
     // STATION LIST RENDERING
     const [stationList,setStationList] = useState([]);
 
@@ -62,7 +63,7 @@ export default function FeedingStationScreen({navigation}){
                                 stationStatus={station.station_status ? 'Online' : 'Offline'}
                                 stationFoodRemain={station.disk_remain ? (station.disk_remain+'%') : ('0%')}
                                 stationChamberRemain={station.box_remain ? (station.box_remain+'%') : ('0%')}
-                                stationMode={station.mode}
+                                stationMode={station.mode ? 'Auto':'Manual'}                                
                                 stationSound={station.soundType}
                                 station_id={station.station_id}
                                 navigation={navigation}

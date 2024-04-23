@@ -12,8 +12,8 @@ import SoundDropdown from './SoundDropdown';
 
 export default function SettingsCard({stationMode,stationSound,foodAmount,setStationMode,setStationSound,setFoodAmount,setChanges}){
 
-    const initStationMode = stationMode;
-    const [thisStationMode,setThisStationMode] = React.useState(initStationMode);
+    // const initStationMode = stationMode;
+    // const [thisStationMode,setThisStationMode] = React.useState(initStationMode);
 
     //Schedule states
     const [visible, setVisible] = React.useState(false);
@@ -35,9 +35,8 @@ export default function SettingsCard({stationMode,stationSound,foodAmount,setSta
                         <AutoModeIcon style={styles.cardIcon}/>
                         <Text style={styles.cardSetting}>Auto mode</Text>
                         <Switch 
-                            value = {thisStationMode}
+                            value = {stationMode}
                             onValueChange ={()=>{
-                                setThisStationMode(!thisStationMode);
                                 setStationMode(!stationMode);
                                 setChanges(true);
                             }}

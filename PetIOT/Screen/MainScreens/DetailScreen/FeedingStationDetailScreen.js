@@ -10,7 +10,8 @@ import StatisticsAndSuggestionsCard from '../../Components/FeedingStationDetail/
 
 export default function FeedingStationDetailScreen({navigation,route}){
     const [changes,setChanges] = useState(false);
-    const [stationMode,setStationMode] = useState(route.params.stationMode);
+    const [stationMode,setStationMode] = useState(route.params.stationMode==='Auto'?true:false);
+    // Alert.alert(stationMode);
     // const [stationMode,setStationMode] = useState(true);
 
     const [stationSound,setStationSound] = useState(route.params.stationSound);
@@ -19,7 +20,7 @@ export default function FeedingStationDetailScreen({navigation,route}){
     const [foodName,setFoodName] = useState(route.params.foodName);
     const [stationName,setStationName] = useState(route.params.stationName);
 
-    Alert.alert(route.params);
+    // Alert.alert(route.params);
 
     return (
         //OUTER LAYER
