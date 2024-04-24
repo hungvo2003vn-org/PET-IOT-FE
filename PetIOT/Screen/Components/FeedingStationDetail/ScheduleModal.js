@@ -11,45 +11,60 @@ import RemoveIcon from "../../../assets/common/remove.svg";
 
 // TO GENEREATE FULL DATE STRING FROM LOCAL TIME STRING
 function getFormattedDate(timeString) {
-    // Create a Date object for today at midnight (00:00:00)
+    // 1. Create a Date object for today at midnight (00:00:00)
     const today = new Date();
     today.setHours(0, 0, 0, 0);
   
-    // Extract hours, minutes, and meridian indicator from the input string
+    // 2. Extract hours and minutes from the input string
     const timeParts = timeString.split(':');
     const hours = parseInt(timeParts[0]);
-    const minutes = parseInt(timeParts[1].slice(0, 2));
-    const meridian = timeParts[1].slice(-2).toUpperCase();
+    const minutes = parseInt(timeParts[1]);
   
-    // Adjust hours for AM/PM
-    let adjustedHours = hours;
-    if (meridian === 'PM' && hours !== 12) {
-      adjustedHours += 12;
-    } else if (meridian === 'AM' && hours === 12) {
-      adjustedHours = 0;
-    }
+    // 3. Set hours and minutes on the Date object
+    today.setHours(hours+7, minutes);
   
-    // Set adjusted hours and minutes on the Date object
-    today.setHours(adjustedHours, minutes, 0); // Set seconds to 0 explicitly
-  
-    // Format the date in the desired format using template literals
-    return `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')} ${adjustedHours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:00`;
+    // 4. Format the date and time in the desired format (yyyy-mm-dd hh:mm:00)
+    return (today.toISOString().slice(0, 16) + ':00').replace('T',' ');
   }
   
   
 // TO GENERATE LOCAL TIME STRING FROM ISO STRING
-function formatDate(date){
-    const formatter = new Intl.DateTimeFormat('en-US', { hour: '2-digit', minute: '2-digit' });
-    const formattedTime = formatter.format(date);
-    return formattedTime;
+function formatDateForInput(isoTimeString){
+    // 1. Create a Date object from the ISO string
+    const date = new Date(isoTimeString);
+  
+    // 2. Adjust for GMT+7 by adding 7 hours
+    date.setHours(date.getHours());
+  
+    // 3. Extract hours and minutes (using zero-padding for single digits)
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+  
+    // 4. Format as "hh:mm"
+    return `${hours}:${minutes}`;
 }
 
+function formatDate(isoTimeString) {
+    // 1. Create a Date object from the ISO string
+    const date = new Date(isoTimeString);
+  
+    // 2. Adjust for GMT+7 by adding 7 hours
+    date.setHours(date.getHours()-7);
+  
+    // 3. Extract hours and minutes (using zero-padding for single digits)
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+  
+    // 4. Format as "hh:mm"
+    return `${hours}:${minutes}`;
+  }
+  
 
 export default function ScheduleModal({station_id}){
 
     const [scheduleList, setScheduleList] = useState([]);
-    const [startTime,setStartTime] = useState(formatDate(Date.now()));
-    const [endTime,setEndTime] = useState(formatDate(Date.now()));
+    const [startTime,setStartTime] = useState(formatDateForInput(Date.now()));
+    const [endTime,setEndTime] = useState(formatDateForInput(Date.now()));
     const [foodAmount,setFoodAmount] = useState(500);
     // console.log(getFormattedDate(startTime));
     // console.log(getFormattedDate(endTime));

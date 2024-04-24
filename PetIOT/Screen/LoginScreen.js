@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import {View,Text,Image,StyleSheet, Alert, ScrollView, TextInput} from 'react-native';
+import {View,Text,Image,StyleSheet, Alert, ScrollView, TextInput, Pressable} from 'react-native';
 import {Button } from 'react-native-paper';
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
@@ -160,7 +160,10 @@ export default function LoginScreen({navigation,route}){
                 {/* Forgot Password */}
                 <Text style={styles.bottomTextForgotPassword}>Forgot password?</Text>
 
-                <Text style={styles.bottomTextSignUpNow}>Sign up now</Text>
+                <Pressable onPress={()=> navigation.navigate('SignUpScreen')}>
+                    <Text style={styles.bottomTextSignUpNow}>Sign up</Text>
+                </Pressable>
+
 
             </View>
         </ScrollView>
@@ -239,7 +242,7 @@ const styles = StyleSheet.create({
         color: 'black',
         fontSize: 14,
         fontFamily:'Roboto',
-        fontWeight: '400',
+        fontWeight: '700',
         letterSpacing: 0.10,
         margin:10,
         paddingTop:30,
@@ -249,9 +252,10 @@ const styles = StyleSheet.create({
         color: 'black',
         fontSize: 14,
         fontFamily:'Roboto',
-        fontWeight: '400',
+        fontWeight: '700',
         letterSpacing: 0.10,
-        margin:20,
+        margin:7,
+        textDecorationLine: 'underline',
     }
 
 

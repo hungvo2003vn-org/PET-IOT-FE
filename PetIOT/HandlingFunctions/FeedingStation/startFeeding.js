@@ -2,7 +2,7 @@ import axios from'axios';
 import * as SecureStore from 'expo-secure-store';
 import { Alert } from 'react-native';
 
-const FEED_AMOUNT= 10;
+const FEED_AMOUNT= 200;
 
 const EXPO_PUBLIC_API_URL="https://pet-iot-be.onrender.com";
 
