@@ -34,10 +34,11 @@ export default function FeedingStationScreen({navigation}){
     const intervalRef = useRef(null);
 
     useEffect(() => {
+        fetchStation({setStationList});
         //Implementing the setInterval method
         const intervalId = setInterval(() => {
             fetchStation({setStationList});
-        }, 5000);
+        }, 20000);
 
         intervalRef.current = intervalId;
         return () => clearInterval(intervalRef.current);
@@ -73,7 +74,7 @@ export default function FeedingStationScreen({navigation}){
                             <FeedingStationCard
                                 stationName = {station.station_name}
                                 stationStatus={station.station_status ? 'Online' : 'Offline'}
-                                stationFoodRemain={station.disk_remain ? (station.disk_remain+'%') : ('0%')}
+                                stationFoodRemain={station.disk_remain ? (station.disk_remain+' grams') : ('0 gram')}
                                 stationChamberRemain={station.box_remain ? (station.box_remain+'%') : ('0%')}
                                 stationMode={station.mode ? 'Auto':'Manual'}                                
                                 stationSound={station.soundType}

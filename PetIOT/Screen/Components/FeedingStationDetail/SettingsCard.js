@@ -17,7 +17,9 @@ export default function SettingsCard({
     setStationMode,
     setStationSound,
     setFoodAmount,
-    setChanges}){
+    setChanges,
+    station_id
+}){
 
     // const initStationMode = stationMode;
     // const [thisStationMode,setThisStationMode] = React.useState(initStationMode);
@@ -31,6 +33,7 @@ export default function SettingsCard({
     //Food amount states
     const [text, setText] = React.useState(`${foodAmount}`);
 
+    // console.log("From setting card with station id = " + station_id);
 
     return (
         <View style={styles.cardContainer}>
@@ -62,7 +65,9 @@ export default function SettingsCard({
 
                         <Portal>
                             <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
-                                <ScheduleModal />
+                                <ScheduleModal 
+                                    station_id = {station_id}
+                                />
                             </Modal>
                         </Portal>
 
@@ -71,6 +76,7 @@ export default function SettingsCard({
                             onPress={showModal}
                             textStyle={styles.chipText}
                             style={styles.chipStyle}
+                            disabled={!stationMode}
                         >edit</Chip>
                     </View>          
 

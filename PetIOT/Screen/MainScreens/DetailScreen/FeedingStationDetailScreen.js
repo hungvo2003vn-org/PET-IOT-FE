@@ -112,6 +112,7 @@ export default function FeedingStationDetailScreen({navigation,route}){
                     setStationSound={setStationSound}
                     setFoodAmount={setFoodAmount}
                     setChanges={setChanges}
+                    station_id ={route.params.station_id}
 
                 />
                 <PetAssignCard 
