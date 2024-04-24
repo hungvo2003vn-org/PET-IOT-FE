@@ -14,7 +14,22 @@
 					"name": "newStation",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjYwYmM4NGZlZTA3Yzc0ODYwMzkwOTMyIiwic2Vzc2lvbl9pZCI6ImRlODA1ODg3LTIyZGUtNGExMi05NzcyLWU3NGVkMGVmNmQyOCIsImlhdCI6MTcxMjA0ODMwNSwiZXhwIjoxNzE0NjQwMzA1fQ.Txv1lrajNafAvtScj-XnifWpZf6W0qo0Ghi1-DJ8UmI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{pet_server}}/v1/station/new",
 							"host": [
@@ -46,7 +61,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"station_id\": \"dwdsd\",\n    \"box_remain\": null\n}",
+							"raw": "{\n    \"station_id\": \"luzbfjdhrzc585\",\n    \"station_name\": \"Trạm chó\",\n    \"box_volumn\": \"1\",\n    \"box_remain\": \"2\",\n    \"food_name\": \"Cat food\",\n    \"disk_remain\": \"3\",\n    \"mode\": false,\n    \"soundType\": \"Meow\",\n    \"pet_id\": null\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -69,11 +84,33 @@
 				},
 				{
 					"name": "getStations",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{pet_token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{pet_server}}/v1/station/get",
+							"raw": "{{pet_server}}/v1/station/get?id=luzbfjdhrzc585",
 							"host": [
 								"{{pet_server}}"
 							],
@@ -81,6 +118,12 @@
 								"v1",
 								"station",
 								"get"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "luzbfjdhrzc585"
+								}
 							]
 						}
 					},
@@ -89,11 +132,21 @@
 				{
 					"name": "editStation",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{pet_token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"station_id\": \"dsdsd\",\n    \"box_remain\": 10\n}",
+							"raw": "{\n    \"station_id\": \"luzbfjdhrzc585\",\n    \"station_name\": \"Trạm chó\",\n    \"box_volumn\": null,\n    \"box_remain\": null,\n    \"food_name\": null,\n    \"disk_remain\": null,\n    \"mode\": true,\n    \"soundType\": null,\n    \"pet_id\": null\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -117,13 +170,193 @@
 			]
 		},
 		{
+			"name": "schedule",
+			"item": [
+				{
+					"name": "start",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{pet_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"station_id\": \"luzbfjdhrzc585\",\n    \"feed_amount\": 14.6\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{pet_server}}/v1/schedule/start",
+							"host": [
+								"{{pet_server}}"
+							],
+							"path": [
+								"v1",
+								"schedule",
+								"start"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "stop",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{pet_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"schedule_id\": \"661c31bb903f2cb3fb5afa2f\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{pet_server}}/v1/schedule/stop",
+							"host": [
+								"{{pet_server}}"
+							],
+							"path": [
+								"v1",
+								"schedule",
+								"stop"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{pet_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"station_id\": \"luzbfjdhrzc585\",\r\n    \"feed_amount\": 41.2,\r\n    \"start_time\": \"2024-04-15 02:50:00\",\r\n    \"end_time\": \"2024-04-15 02:51:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{pet_server}}/v1/schedule",
+							"host": [
+								"{{pet_server}}"
+							],
+							"path": [
+								"v1",
+								"schedule"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSingle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{pet_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{pet_server}}/v1/schedule?id=",
+							"host": [
+								"{{pet_server}}"
+							],
+							"path": [
+								"v1",
+								"schedule"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{pet_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{pet_server}}/v1/schedule",
+							"host": [
+								"{{pet_server}}"
+							],
+							"path": [
+								"v1",
+								"schedule"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "login",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"heo1@gmail.com\",\n    \"password\": \"1\"\n}",
+					"raw": "{\n    \"email\": \"khoa@gmail.com\",\n    \"password\": \"something\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -151,7 +384,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"heo1@gmail.com\",\n    \"password\": 1,\n    \"firstName\": \"Hưng\",\n    \"lastName\": \"Võ\"\n}",
+					"raw": "{\n    \"email\": \"khoa@gmail.com\",\n    \"password\": \"something\",\n    \"firstName\": \"Khoa\",\n    \"lastName\": \"Tran\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
