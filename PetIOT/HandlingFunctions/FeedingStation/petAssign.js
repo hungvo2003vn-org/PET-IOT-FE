@@ -19,6 +19,8 @@ export default async function petAssign({station_id,pet_id}){
         "pet_id":`${pet_id}`
     }
 
+    // console.log("This is new petid: " + pet_id);
+
     const config ={
         headers:{
             'Authorization':'Bearer ' + accessToken
@@ -33,7 +35,7 @@ export default async function petAssign({station_id,pet_id}){
             const data = response.data;
             if(data){
                 // data.setSpinnerVisibility(false);
-                // console.log(request_data);
+                // console.log(data);
                 // Alert.alert("Changes applied");
                 return;
 

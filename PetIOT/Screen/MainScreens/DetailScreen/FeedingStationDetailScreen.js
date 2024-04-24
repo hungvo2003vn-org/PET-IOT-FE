@@ -167,7 +167,7 @@ export default function FeedingStationDetailScreen({navigation,route}){
                     // console.log("This is station mode: " + typeof(stationMode))
                     // await fetchStation(route.params.setStationList);
 
-                    // await route.params.onFinish({setStationList:route.params.setStationList});
+                    route.params.onFinish({setStationList:route.params.setStationList});
 
 
                     setChanges(false);
