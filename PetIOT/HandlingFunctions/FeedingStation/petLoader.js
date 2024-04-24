@@ -43,7 +43,7 @@ export default async function petLoader({setPetList}){
         })
 
 
-    console.log(list[0].data)
+    // console.log(list[0].data)
 
     // return list[0].data;
     

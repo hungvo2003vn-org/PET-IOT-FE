@@ -30,6 +30,8 @@ export default async function stationLoader(){
             const stationData = response.data;
 
             if (stationData){
+                // console.log("New station list fetched");
+                // console.log(stationData);
                 list.push(stationData);
             }   else{
                 Alert.alert('Error happens');
@@ -45,7 +47,7 @@ export default async function stationLoader(){
         })
 
 
-    console.log(list[0].data)
+    // console.log(list[0].data)
 
     return list[0].data;
 

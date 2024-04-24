@@ -1,5 +1,5 @@
-import React,{useState,useEffect} from 'react';
-import {View,Text,StyleSheet,Alert,ScrollView,FlatList} from 'react-native';
+import React,{useState,useEffect,useCallback,useRef} from 'react';
+import {View,Text,StyleSheet,Alert,ScrollView,FlatList, RefreshControl} from 'react-native';
 import {Button, Appbar,Modal,Portal, ActivityIndicator} from 'react-native-paper';
 
 import FeedingStationCard from '../Components/FeedingStation/FeedingStationCard';
@@ -10,6 +10,7 @@ import fetchStation from '../../HandlingFunctions/FeedingStation/fetchStation';
 
 
 export default function FeedingStationScreen({navigation}){
+
     //ADD FEED STATION BOX
     const [addStationModalVisible,setAddStationModalVisible] = useState(false);
     const showAddStationModal = ()=> setAddStationModalVisible(true);
@@ -19,28 +20,39 @@ export default function FeedingStationScreen({navigation}){
     // STATION LIST RENDERING
     const [stationList,setStationList] = useState([]);
 
-    const fetchData = async () =>{
-        const data = await stationLoader();
-        setStationList(data);
-        // console.log("Data fetched")
-    }
+    // REFRESH MECHANISM
+    const [refreshing,setRefreshing] = useState(false);
+    const onRefresh = useCallback(()=>{
+        setRefreshing(true);
+        setTimeout(()=>{
+            setRefreshing(false);
+            fetchStation({setStationList})
+        },2000);
+    },[]);
+
+    // USE EFFECT TO REFRESH SCREEN INTERVALY
+    const intervalRef = useRef(null);
 
     useEffect(() => {
+        //Implementing the setInterval method
+        const intervalId = setInterval(() => {
+            fetchStation({setStationList});
+        }, 5000);
 
-
-
-        fetchStation({setStationList});
-        // console.log(stationList[0].food_name);
+        intervalRef.current = intervalId;
+        return () => clearInterval(intervalRef.current);
 
     }, []); // Empty dependency array: runs only on initial render
 
 
-
-
-
     return (
         //OUTER LAYER
-        <ScrollView style={styles.container}>
+        <ScrollView 
+            style={styles.container}
+            refreshControl={<RefreshControl 
+                                refreshing = {refreshing} 
+                                onRefresh={onRefresh}/>}
+        >
             {/* <ActivityIndicator/> */}
 
             {/* APP BAR */}
@@ -70,6 +82,8 @@ export default function FeedingStationScreen({navigation}){
                                 key={station.station_id}
                                 pet_id={station.pet_id}
                                 foodName={station.food_name}
+                                onFinish={fetchStation}
+                                setStationList={setStationList}
                             />
                     )
                     : <Text style={styles.noStation}>No station to show</Text>

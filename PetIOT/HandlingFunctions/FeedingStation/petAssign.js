@@ -45,6 +45,9 @@ export default async function petAssign({station_id,pet_id}){
         })
         .catch(function(error){
             // data.setSpinnerVisibility(false);
+            if (!pet_id){
+                return;
+            }
             const errorMessage = error.response?.data?.message || error.response?.statusText;
             console.error("Error:", errorMessage);
             Alert.alert("Error happens: "+errorMessage);

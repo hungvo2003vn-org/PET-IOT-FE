@@ -1,5 +1,5 @@
-import React,{useState} from 'react';
-import {View,Text,StyleSheet,Alert,ScrollView, Pressable,TouchableHighlight} from 'react-native';
+import React,{useState, useCallback} from 'react';
+import {View,Text,StyleSheet,Alert,ScrollView, Pressable,TouchableHighlight, RefreshControl} from 'react-native';
 import {Button, Appbar} from 'react-native-paper';
 import PowerIcon from '../../../assets/FeedingStationDetailScreen/power-button-svgrepo-com 2.svg' 
 
@@ -28,6 +28,20 @@ function valueCheck(data){
 
 
 export default function FeedingStationDetailScreen({navigation,route}){
+
+    // REFRESH MECHANISM
+    const [refreshing,setRefreshing] = useState(false);
+    const onRefresh = useCallback(async()=>{
+        setRefreshing(true);
+        setTimeout(()=>{
+            setRefreshing(false);
+            // fetchStation({setStationList})
+            route.params.onFinish({setStationList:route.params.setStationList});
+
+        },2000);
+    },[]);
+
+
     const [changes,setChanges] = useState(false);
     const [stationMode,setStationMode] = useState(route.params.stationMode==='Auto'?true:false);
     // Alert.alert(stationMode);
@@ -44,7 +58,12 @@ export default function FeedingStationDetailScreen({navigation,route}){
 
     return (
         //OUTER LAYER
-        <ScrollView>
+        <ScrollView
+            style={styles.container}
+            refreshControl={<RefreshControl 
+                                refreshing = {refreshing} 
+                                onRefresh={onRefresh}/>}
+        >
             <Spinner
                 visible={spinnerVisibility}
             />
@@ -56,7 +75,7 @@ export default function FeedingStationDetailScreen({navigation,route}){
 
                     {/* Station name */}
                     <Appbar.Content 
-                        title={route.params.stationName}
+                        title={stationName}
                         titleStyle={styles.appBarContentTitle}
                         style={styles.appBarContent}
                     />
@@ -127,7 +146,15 @@ export default function FeedingStationDetailScreen({navigation,route}){
                         "mode":stationMode,
                         "soundType":null,
 
+                    });
+
+
+                    await petAssign({
+                        "station_id":route.params.station_id,
+                        "pet_id" : petId
                     })
+
+
                     await editStation({
                         "station_id":route.params.station_id,
                         "station_name":stationName,
@@ -139,12 +166,11 @@ export default function FeedingStationDetailScreen({navigation,route}){
                     // console.log("This is station mode: " + typeof(stationMode))
                     // await fetchStation(route.params.setStationList);
 
-                    await petAssign({
-                        "station_id":route.params.station_id,
-                        "pet_id" : petId
-                    })
+                    // await route.params.onFinish({setStationList:route.params.setStationList});
+
 
                     setChanges(false);
+
 
                 }}
             >Save changes</Button>

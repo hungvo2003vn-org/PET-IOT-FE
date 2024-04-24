@@ -32,7 +32,9 @@ export default function PetDropdown({
 }, []); // Empty dependency array: runs only on initial render
   
 
-  console.log(petList);
+  // console.log(petList);
+
+
   // console.log(petId);
 
   return (

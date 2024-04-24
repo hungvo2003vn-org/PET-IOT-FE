@@ -7,7 +7,7 @@ import startFeeding from '../../../HandlingFunctions/FeedingStation/startFeeding
 
 import FeedingStationCardTitle from './FeedingStationCardTitle';
 
-export default function FeedingStationCard({stationName,stationStatus,stationFoodRemain,stationChamberRemain, stationMode, stationSound,station_id,navigation,pet_id,foodName,setStationList}){
+export default function FeedingStationCard({stationName,stationStatus,stationFoodRemain,stationChamberRemain, stationMode, stationSound,station_id,navigation,pet_id,foodName,setStationList, onFinish}){
     const [spinnerVisibility, setSpinnerVisibility] = useState(false);
     
 
@@ -22,7 +22,8 @@ export default function FeedingStationCard({stationName,stationStatus,stationFoo
                                                         station_id:station_id,
                                                         pet_id:pet_id,
                                                         foodName:foodName,
-                                                        setStationList:setStationList
+                                                        setStationList:setStationList,
+                                                        onFinish:onFinish,
                                                         })}>
                 <Card.Title 
                     title={stationName}
