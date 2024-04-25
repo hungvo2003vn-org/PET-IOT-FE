@@ -34,7 +34,7 @@ export default function FoodRemainListCard() {
                     key={station.station_id} 
                     stationName={station.station_name}
                     stationMode={station.mode? 'Auto':'Manual'}
-                    stationFoodRemain={station.disk_remain+'%'}
+                    stationFoodRemain={station.disk_remain+' grams'}
                     stationFoodType={station.food_name}
                 />
             ))}

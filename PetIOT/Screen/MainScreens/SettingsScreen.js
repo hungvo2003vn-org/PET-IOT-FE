@@ -44,10 +44,9 @@ export default function SettingsScreen() {
 
             <Button
                 onPress={signOutHandler}
-                mode="contained"
                 buttonColor = '#88511D'
+                textColor='white'
                 style={styles.signOutButton}
-                labelStyle={{ color: 'white', fontSize: 20 }}
             >Sign out</Button>
         </ScrollView>
     );
@@ -107,10 +106,10 @@ const styles = StyleSheet.create({
     },
 
     signOutButton: {
-        width: 210,
-        alignSelf: 'center',
-        height: 40,
-        marginBottom: 20,
+        width:210,
+        alignSelf:'center',
+        marginTop: 30,
+        marginBottom: 30,
     },
     settingsIconContainer: {
         alignSelf: 'center',

@@ -2,6 +2,8 @@ import React from 'react';
 import {View,StyleSheet,Alert,ScrollView, Pressable,TouchableHighlight} from 'react-native';
 import {Button,Card,Text} from 'react-native-paper';
 
+import FeedingStationCardTitle from '../FeedingStation/FeedingStationCardTitle';
+
 export default function PetCard({petName, petStationId, petBreed, petType, user_note, navigation, pet_id}){
     return (
         <Card style={styles.card}>
@@ -9,8 +11,9 @@ export default function PetCard({petName, petStationId, petBreed, petType, user_
                 <Card.Title 
                     title={petName}
                     titleStyle={styles.cardTitleStyle}
-                    subtitle={pet_id}
                     subtitleStyle = {styles.cardSubTitleStyle}
+                    right ={(props)=> <FeedingStationCardTitle/>}
+
                 />
                 <Card.Content style={styles.cardContent}>
                     {/* Horizontal line */}
@@ -50,9 +53,10 @@ const styles = StyleSheet.create({
         color:'#221A14',
         fontSize: 16,
         fontFamily:'Roboto',
-        fontWeight:'600',
+        fontWeight:'700',
         lineHeight:24,
-        letterSpacing:0.15
+        letterSpacing:0.15,
+        paddingTop:5,
     },
     cardSubTitleStyle:{
         color:'#221A14',
@@ -84,7 +88,8 @@ const styles = StyleSheet.create({
         fontWeight: '400',
         lineHeight: 20,
         letterSpacing: 0.25,
-        textAlign:'right'
+        textAlign:'right',
+        marginEnd:20
     },
     cardAction:{
         flex:1,
