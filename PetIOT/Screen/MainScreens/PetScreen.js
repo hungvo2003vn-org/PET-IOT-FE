@@ -1,31 +1,45 @@
-import React,{useState,useEffect} from 'react';
-import {View,Text,StyleSheet,Alert,ScrollView,FlatList} from 'react-native';
-import {Button, Appbar,Modal,Portal} from 'react-native-paper';
+import React,{useState,useEffect,useCallback,useRef} from 'react';
+import {View,Text,StyleSheet,Alert,ScrollView,FlatList, RefreshControl} from 'react-native';
+import {Button, Appbar,Modal,Portal, ActivityIndicator} from 'react-native-paper';
 import PetCard from '../Components/Pet/PetCard';
 import AddPetModal from '../Components/Pet/AddPetModal'; 
-import petLoader from '../../HandlingFunctions/Pet/petLoader';
+import fetchPet from '../../HandlingFunctions/Pet/fetchPet';
 
 export default function PetScreen({navigation}){
     
-    //ADD PET BOX
-    const [addPetModalVisible,setAddPetModalVisible] = useState(false);
-    const showAddPetModal = ()=> setAddPetModalVisible(true);
-    const hideAddPetModal = ()=> setAddPetModalVisible(false);
-
-    // PET LIST RENDERING
-    const [petList,setPetList] = useState([]);
-
-    useEffect(() => {
-
-        const fetchData = async () =>{
-            const data = await petLoader();
-            setPetList(data);
-        }
-
-        fetchData();
-
-
-    }, []); // Empty dependency array: runs only on initial render
+     //ADD FEED STATION BOX
+     const [addPetModalVisible,setAddPetModalVisible] = useState(false);
+     const showAddPetModal = ()=> setAddPetModalVisible(true);
+     const hideAddPetModal = ()=> setAddPetModalVisible(false);
+ 
+ 
+     // Pet LIST RENDERING
+     const [petList,setPetList] = useState([]);
+ 
+     // REFRESH MECHANISM
+     const [refreshing,setRefreshing] = useState(false);
+     const onRefresh = useCallback(()=>{
+         setRefreshing(true);
+         setTimeout(()=>{
+             setRefreshing(false);
+             fetchPet({setPetList})
+         },2000);
+     },[]);
+ 
+     // USE EFFECT TO REFRESH SCREEN INTERVALY
+     const intervalRef = useRef(null);
+ 
+     useEffect(() => {
+         fetchPet({setPetList});
+         //Implementing the setInterval method
+         const intervalId = setInterval(() => {
+             fetchPet({setPetList});
+         }, 20000);
+ 
+         intervalRef.current = intervalId;
+         return () => clearInterval(intervalRef.current);
+ 
+     }, []); // Empty dependency array: runs only on initial render
     
     return (
         //OUTER LAYER
@@ -46,17 +60,15 @@ export default function PetScreen({navigation}){
                 {
                     petList.map((pet) =>
                             <PetCard
-                                petName = {pet.pet_id}
-                                petStationName={pet.station_id}
-                                petWeight={'5 kg'}
-                                petStatus={'Normal'}
-                                station_id={pet.station_id}
+                                petName = {pet.name}
+                                petStationId={pet.station_id}
+                                user_note={pet.user_note}
                                 navigation={navigation}
-                                key={pet.pet_id}
-                                pet_id={pet.pet_id}
-                                species={pet.species}
-                                breed={pet.breed}
-                                birth_year={pet.birth_year}
+                                key={pet._id}
+                                pet_id={pet._id}
+                                petType={pet.type}
+                                petBreed={pet.breed}
+                                birth_date={pet.birth_date}
                                 color={pet.color}
                             />
                         

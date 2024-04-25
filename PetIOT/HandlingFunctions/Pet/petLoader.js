@@ -10,9 +10,8 @@ const EXPO_PUBLIC_API_URL="https://pet-iot-be.onrender.com";
 
 
 export default async function petLoader(){
-    //GET PET INFORMATION
-    const petList = JSON.parse(SecureStore.getItem('userInformation')).pet;
-    //GET USER TOKEN
+
+
     const accessToken = SecureStore.getItem('accessToken');
 
     var list=[]
@@ -30,6 +29,7 @@ export default async function petLoader(){
             const petData = response.data;
 
             if (petData){
+                
                 list.push(petData);
             }   else{
                 Alert.alert('Error happens');
@@ -45,7 +45,7 @@ export default async function petLoader(){
         })
 
 
-    // console.log(list[0].data)
+    
 
     return list[0].data;
 

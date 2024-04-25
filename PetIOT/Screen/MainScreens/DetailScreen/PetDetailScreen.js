@@ -1,12 +1,13 @@
 import React from 'react';
 import {View,Text,StyleSheet,Alert,ScrollView, Pressable,TouchableHighlight} from 'react-native';
 import {Button, Appbar} from 'react-native-paper';
-
+import Spinner from 'react-native-loading-spinner-overlay';
 
 import BasicInformationCard from '../../Components/PetDetail/BasicInformationCard';
 import MedicalInformationCard from '../../Components/PetDetail/MedicalInformationCard';
 import StatisticsAndSuggestionsCard from '../../Components/PetDetail/StatisticsAndSuggestionsCard';
 
+import fetchPet from '../../../HandlingFunctions/Pet/fetchPet';
 
 export default function PetDetailScreen({navigation,route}){
     return (

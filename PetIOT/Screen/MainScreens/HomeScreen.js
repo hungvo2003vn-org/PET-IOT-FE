@@ -1,9 +1,10 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Image } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, ScrollView, Image, Alert } from 'react-native';
 
 import TipsBackgroundCard from '../Components/Home/TipsBackgroundCard';
 import FoodRemainBackgroundCard from '../Components/Home/FoodRemainBackgroundCard';
 import Logo from '../../assets/Home/logo.svg';
+import userLoader from '../../HandlingFunctions/Home/userLoader';
 
 const imagePaths = [
   require('../../assets/Home/Image.jpg'),
@@ -15,7 +16,23 @@ const imagePaths = [
 ];
 
 export default function HomeScreen() {
-  return (
+    
+    const [userInfo, setUserInfo] = useState(null);
+
+    useEffect(() => {
+      async function fetchUserInfo() {
+        try {
+          const userData = await userLoader();
+          setUserInfo(userData);
+        } catch (error) {
+          Alert.alert('Error', error.message);
+        }
+      }
+  
+      fetchUserInfo();
+    }, []);
+  
+    return (
       <ScrollView contentContainerStyle={styles.container}>
           {/* Logo and Header */}
           <View style={styles.logoHeaderContainer}>
@@ -23,7 +40,9 @@ export default function HomeScreen() {
                   <Logo width={50} height={50} />
               </View>
               <View style={styles.header}>
-                  <Text style={styles.headerText}>Good morning user</Text>
+                  <Text style={styles.headerText}>
+                    {userInfo ? `Good morning ${userInfo.firstName} ${userInfo.lastName}` : 'Good morning user'}
+                  </Text>
               </View>
           </View>
 
@@ -35,9 +54,9 @@ export default function HomeScreen() {
           </ScrollView>
 
           {/* Other Components */}
-          <Text style = {styles.tipsText}>Food remain</Text>
+          <Text style={styles.tipsText}>Food remain</Text>
           <FoodRemainBackgroundCard />
-          <Text style = {styles.tipsText}>Tips</Text>
+          <Text style={styles.tipsText}>Tips</Text>
           <TipsBackgroundCard />
       </ScrollView>
   );
@@ -86,5 +105,5 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     letterSpacing: 0.10,
     marginLeft: 10,
-},
+  },
 });
