@@ -1,105 +1,122 @@
-import React,{useState,useEffect} from 'react';
-import {View,StyleSheet,Alert,ScrollView, Pressable,TouchableHighlight} from 'react-native';
-import {Button,Card,Text,Modal,TextInput} from 'react-native-paper';
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, Alert, ScrollView, Pressable, TouchableHighlight } from 'react-native';
+import { Button, Card, Text, Modal, TextInput, Switch } from 'react-native-paper';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 import addPet from '../../../HandlingFunctions/Pet/addPet';
 
+function valueCheck(data) {
+    for (const item in data) {
+        if (data[item].trim() === '') { // Trim white spaces before checking
+            Alert.alert(`${item} cannot be empty`);
+            return false;
+        }
+    }
+    return true;
+}
 
-export default function AddPetModal({hideAddPetModal}){
-    const [pet_id,setPet_id] = useState('');
-    const [species,setSpecies] = useState('1');
-    const [breed,setBreed] = useState('2');
-    const [birth_year,setBirth_year] = useState('5 kg');
-    const [color,setColor] = useState('3');
-    const [station_id,setStation_id] = useState(null);
-
-
-
+export default function AddPetModal({ hideAddPetModal, onFinish, setPetList }) {
+    const [_id, set_id] = useState('');
+    const [type, setType] = useState('');
+    const [birth_date, setBirth_date] = useState('');
+    const [breed, setBreed] = useState('');
+    const [color, setColor] = useState('');
+    const [name, setName] = useState('');
+    const [user_note, setUser_note] = useState(null);
+    const [station_id, setStation_id] = useState('');
+    const [spinnerVisibility, setSpinnerVisibility] = useState(false);
 
     return (
         <ScrollView style={styles.container}>
-            <Text>Add pet</Text>
-            <TextInput
-                label="Pet ID"
-                value={pet_id}
-                onChangeText={pet_id=>setPet_id(pet_id)}
-                style={styles.textInput}
-            >
-            </TextInput>
+            <Text style={styles.addPetText}>Add pet</Text>
+            <Spinner
+                visible={spinnerVisibility}
+            />
 
             <TextInput
-                label="Species"
-                value={species}
-                onChangeText={species=>setSpecies(species)}
+                label="Type"
+                value={type}
+                onChangeText={setType}
                 style={styles.textInput}
-            >
-            </TextInput>
+            />
+
+            <TextInput
+                label="Birth Date"
+                value={birth_date}
+                onChangeText={setBirth_date}
+                style={styles.textInput}
+            />
 
             <TextInput
                 label="Breed"
                 value={breed}
-                onChangeText={breed=>setBreed(breed)}
+                onChangeText={setBreed}
                 style={styles.textInput}
-            >
-            </TextInput>
-
-            <TextInput
-                label="Birth_year"
-                value={birth_year}
-                onChangeText={birth_year=>setBirth_year(birth_year)}
-                style={styles.textInput}
-            >
-            </TextInput>
+            />
 
             <TextInput
                 label="Color"
                 value={color}
-                onChangeText={color=>setColor(color)}
+                onChangeText={setColor}
                 style={styles.textInput}
-            >
-            </TextInput>
-
-            
+            />
 
             <TextInput
-                label="Station ID"
-                value={station_id}
-                onChangeText={station_id=>setStation_id(station_id)}
+                label="Pet name"
+                value={name}
+                onChangeText={setName}
                 style={styles.textInput}
-            >
-            </TextInput>
+            />
 
-            
-
-
+            <TextInput
+                label="User note"
+                value={user_note}
+                onChangeText={setUser_note}
+                style={styles.textInput}
+            />
 
             <Button
                 mode={'contained'}
                 style={styles.button}
-                onPress={async ()=>{
-                    Alert.alert('Processing');
-                    await addPet({pet_id,species,breed,birth_year,color,station_id},hideAddPetModal)
+                onPress={async () => {
+                    if (valueCheck({ type, breed, name })) {
+                        setSpinnerVisibility(true);
+                        await addPet({ _id, type, birth_date, breed, color, name, user_note, station_id }, hideAddPetModal);
+                        await onFinish({ setPetList });
+                    }
                 }}
-        
             >
                 Enter
             </Button>
         </ScrollView>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
 
-    container:{
-        backgroundColor: 'white',
+    container: {
+        backgroundColor: '#FFFFFF',
         padding: 20,
     },
 
-    textInput:{
-        margin:20,
+    textInput: {
+        margin: 20,
+        backgroundColor: '#D6C3B6',
     },
 
-    button:{
-        margin:40
-    }
-})
+    button: {
+        marginBottom: 70,
+        margin: 40,
+        backgroundColor: '#51443B',
+    },
+
+    addPetText: {
+        color: '#221A14',
+        fontSize: 20,
+        fontFamily: 'Roboto',
+        fontWeight: '700',
+        lineHeight: 24,
+        letterSpacing: 0.15,
+        alignSelf: 'center'
+    },
+});

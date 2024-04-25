@@ -2,36 +2,36 @@ import React from 'react';
 import {View,StyleSheet,Alert,ScrollView, Pressable,TouchableHighlight} from 'react-native';
 import {Button,Card,Text} from 'react-native-paper';
 
-export default function PetCard({petName, petStationName, petBehavior, petWeight, petStatus, navigation}){
+export default function PetCard({petName, petStationId, petBreed, petType, user_note, navigation, pet_id}){
     return (
         <Card style={styles.card}>
-            <Pressable onPress={()=>navigation.navigate('PetDetail',{petName:petName,petStationName:petStationName})}>
+            <Pressable onPress={()=>navigation.navigate('PetDetail',{petName:petName,petStationId:petStationId, pet_id:pet_id})}>
                 <Card.Title 
                     title={petName}
                     titleStyle={styles.cardTitleStyle}
-                    subtitle={petStationName}
+                    subtitle={pet_id}
                     subtitleStyle = {styles.cardSubTitleStyle}
                 />
                 <Card.Content style={styles.cardContent}>
                     {/* Horizontal line */}
                     <View style={{borderBottomColor:'black', borderBottomWidth: 1}}/>
 
-                    {/* Eating behavior */}
+                    {/* Eating Breed */}
                     <View style={styles.informationDisplayer}>
-                        <Text style={styles.informationType}>Eating behavior</Text>
-                        <Text style={styles.informationValue}>{petBehavior}</Text>
+                        <Text style={styles.informationType}>Breed</Text>
+                        <Text style={styles.informationValue}>{petBreed}</Text>
                     </View>
 
                     {/* Food in chamber display */}
                     <View style={styles.informationDisplayer}>
-                        <Text style={styles.informationType}>Current weight</Text>
-                        <Text style={styles.informationValue}>{petWeight}</Text>
+                        <Text style={styles.informationType}>Type</Text>
+                        <Text style={styles.informationValue}>{petType}</Text>
                     </View>
 
                     {/* Mode display */}
                     <View style={styles.informationDisplayer}>
-                        <Text style={styles.informationType}>Pet status</Text>
-                        <Text style={styles.informationValue}>{petStatus}</Text>
+                        <Text style={styles.informationType}>User note</Text>
+                        <Text style={styles.informationValue}>{user_note}</Text>
                     </View>
 
                 </Card.Content>
