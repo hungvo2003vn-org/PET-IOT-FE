@@ -11,7 +11,14 @@ const { assetExts, sourceExts } = defaultConfig.resolver;
  */
 const config = {
   transformer: {
-    babelTransformerPath: require.resolve("react-native-svg-transformer")
+    babelTransformerPath: require.resolve("react-native-svg-transformer"),
+    assetPlugins: ['expo-asset/tools/hashAssetFiles'],
+    getTransformOptions: async () => ({
+      transform: {
+        experimentalImportSupport: false,
+        inlineRequires: false
+      }
+    })
   },
   resolver: {
     assetExts: assetExts.filter((ext) => ext !== "svg"),

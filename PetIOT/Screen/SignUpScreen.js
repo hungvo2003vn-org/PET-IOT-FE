@@ -47,7 +47,7 @@ async function handleSignUp({username,password,firstName,lastName,setSpinnerVisi
     // Alert.alert('Processing...');
 
     //VERIFY USER INFORMATION
-    await axios.post(`${EXPO_PUBLIC_API_URL}/v1/user/login`,{
+    await axios.post(`${EXPO_PUBLIC_API_URL}/v1/user/register`,{
         email:`${username}`,
         password:`${password}`,
         firstName:`${firstName}`,
